@@ -62,7 +62,7 @@ export default function LoginFormScreen({ navigation }) {
                     {/* //* Admin  */}
                     <TouchableOpacity
                         style={styles.navSignupButton}
-                        onPress={() => navigation.navigate('Admin')}
+                        onPress={() => navigation.navigate('AdminStack')}
                     >
                         <Text style={styles.loginButtonText}>Admin</Text>
                     </TouchableOpacity>

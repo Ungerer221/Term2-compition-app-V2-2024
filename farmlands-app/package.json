@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@firebase/firestore": "^4.6.3",
     "@hugeicons/react-native-pro": "^0.1.7",
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/drawer": "^6.6.15",

@@ -9,11 +9,12 @@ import HomeScreen from "../homeScreen"
 import NewsScreen from "../newsScreen";
 import ProfileScreen from "../profileScreen";
 import GameScreen from "../gameScreen";
+import AdminScreen from "../adminScreen";
+import PlantListScreen from "../plantListScreen";
 // Icons
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import AdminScreen from "../adminScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -69,6 +70,17 @@ export function MyTab() {
             tabBarActiveTintColor: '#F65774',
           }}
         />
+        <Tab.Screen
+          name="AdminStack"
+          component={AdminStack}
+          options={{
+            tabBarLabel: 'Admin',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="newspaper-variant-outline" color={color} size={size} />
+            ),
+            tabBarActiveTintColor: '#F65774',
+          }}
+        />
         {/* <Tab.Screen /> */}
       </Tab.Navigator>
     </NavigationContainer>
@@ -82,9 +94,18 @@ export function MyStack() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginFormScreen} />
         <Stack.Screen name="Signup" component={SignUpScreen} />
-        <Stack.Screen name="Admin" component={AdminScreen} />
+        <Stack.Screen name="AdminStack" component={AdminStack} />
         <Stack.Screen name="Home" component={MyTab} />
       </Stack.Navigator>
     </NavigationContainer >
   );
+}
+
+export function AdminStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="PlantList" component={PlantListScreen} />
+      <Stack.Screen name="Admin" component={AdminScreen} />
+    </Stack.Navigator>
+  )
 }

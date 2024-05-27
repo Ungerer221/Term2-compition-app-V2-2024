@@ -11,7 +11,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 //Screen Imports
-import HomeScreen from '../screens/homeScreen';
+// import HomeScreen from '../screens/homeScreen';
 
 // const Stack = createStackNavigator();
 const Stack = createNativeStackNavigator();

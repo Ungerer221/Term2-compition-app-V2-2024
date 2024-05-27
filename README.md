@@ -208,3 +208,22 @@ https://gist.github.com/himanshu717171/b70794816b36b1de41d8dd679e17aba5
 
 A Blog
 https://blog.reactnativecoach.com/creating-draggable-component-with-react-native-132d30c27cb0
+
+# Firebase
+
+Expo install
+```
+npx expo install firebase
+```
+
+npm install
+
+```
+npm install firebase
+```
+
+## Firestore
+
+```
+npm i @firebase/firestore
+```

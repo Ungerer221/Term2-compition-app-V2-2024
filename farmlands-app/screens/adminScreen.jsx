@@ -9,6 +9,8 @@ export default function AdminScreen() {
     const [priority, setPriority] = useState(false)
     const [due, setDue] = useState('')
     const [description, setDescription] = useState('')
+    const [growthTime, setGrowthTime] = useState('')
+
 
 
     // TODO : ADD VALIDATION
@@ -35,17 +37,17 @@ export default function AdminScreen() {
         <View style={styles.container}>
             <TextInput
                 style={styles.inputField}
-                placeholder="Bucket List Title"
+                placeholder="Plant Title"
                 onChangeText={newText => setTitle(newText)}
                 defaultValue={title}
             />
 
-            <TextInput
+            {/* <TextInput
                 style={styles.inputField}
                 placeholder="When do you want it done?"
                 onChangeText={newText => setDue(newText)}
                 defaultValue={due}
-            />
+            /> */}
 
             <TextInput
                 multiline
@@ -54,6 +56,15 @@ export default function AdminScreen() {
                 placeholder="Description of bucket list"
                 onChangeText={newText => setDescription(newText)}
                 defaultValue={description}
+            />
+
+            <TextInput
+                multiline
+                numberOfLines={4}
+                style={styles.inputField}
+                placeholder="Growth Time"
+                onChangeText={newText => setGrowthTime(newText)}
+                defaultValue={growthTime}
             />
 
             <View style={styles.switch}>
@@ -69,7 +80,7 @@ export default function AdminScreen() {
 
             {/* the onpress for our create item */}
             <TouchableOpacity style={styles.button} onPress={handleCreation}>
-                <Text style={styles.buttonText}>Create Bucket List Item</Text>
+                <Text style={styles.buttonText}>Create Plant Item</Text>
             </TouchableOpacity>
         </View>
     )
@@ -81,8 +92,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        width:'100%',
-        backgroundColor:'gray',
+        width: '100%',
+        // backgroundColor:'gray',
     },
     container02: {
         backgroundColor: '#82BF00'
@@ -92,7 +103,8 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         marginTop: 15,
         padding: 10,
-        color:'black'
+        color: 'black',
+        width: '90%',
     },
     button: {
         backgroundColor: "green",
