@@ -227,3 +227,9 @@ npm install firebase
 ```
 npm i @firebase/firestore
 ```
+
+for native
+
+```
+npm i @react-native-firebase/firestore
+```
