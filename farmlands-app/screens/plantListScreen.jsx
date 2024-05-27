@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Pressable, } from 'react-native'
 import React, { useState } from 'react'
 import { Entypo } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
-import { getMyBucketList } from '../services/DbService';
+import { getMyBucketList } from '../services/plantDbService';
 
 export default function PlantListScreen({ navigation }) {
 

@@ -23,5 +23,5 @@ export const auth = getAuth(app);
 // const loginEmailPassword = async ()=> {
 // }
 
-// TODO: Initialize Cloud Firestore and get a reference to the service
+// * : Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app)

@@ -21,5 +21,6 @@ export const getAllPlantsList = async () => {
       // doc.data() is never undefined for query doc snapshots
       console.log(doc.id, " => ", doc.data());
     });
+    // console.log(getAllPlantsList)
 }
 

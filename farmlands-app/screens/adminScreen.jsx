@@ -1,6 +1,6 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Switch } from 'react-native'
 import React, { useState } from 'react'
-import { createNewBucketItem } from '../services/DbService'
+// import { createNewBucketItem } from '../services/plantDbService'
 
 export default function AdminScreen() {
 
@@ -10,27 +10,6 @@ export default function AdminScreen() {
     const [due, setDue] = useState('')
     const [description, setDescription] = useState('')
     const [growthTime, setGrowthTime] = useState('')
-
-
-
-    // TODO : ADD VALIDATION
-    // * : we want to call the createNewBucketItem function to our create screen 
-    // done at the top to pass our data down
-    const handleCreation = async () => {
-        // todo : need to pass all our data to the function - defined in services file
-        // now for item creation
-        // TODO : make sure all values have been entered - show error if not - or hide button - basic if statement logic
-        var items = { title, priority, due, description, isCompleted: false }
-        // * : to navigate back to previous screen after filling in info
-        var success = await createNewBucketItem(items)
-        if (success) {
-            navigation.goBack() // if successfull go back home
-            // Optional that when the use click create then only will it go back and re-render the data insead of it always re-rendering apon viewing
-            // check passing parameters to routes : https://reactnavigation.org/docs/params : passing params to previous screen
-        } else {
-            // TODO : validation on why
-        }
-    }
 
 
     return (
