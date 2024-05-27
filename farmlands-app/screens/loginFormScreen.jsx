@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     },
     navSignupButton: {
         width: '50%',
-        backgroundColor: '#FFD166',
+        backgroundColor: '#F65774',
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,

@@ -12,6 +12,8 @@ import GameScreen from './screens/gameScreen';
 import NewsScreen from './screens/newsScreen';
 import SignUpScreen from './screens/signUpScreen';
 import LoginFormScreen from './screens/loginFormScreen';
+import PlantListScreen from './screens/plantListScreen';
+import AdminScreen from './screens/adminScreen';
 
 // views
 import TopNavBar from './views/topNavBar';

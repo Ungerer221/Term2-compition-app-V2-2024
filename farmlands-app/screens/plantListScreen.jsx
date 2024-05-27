@@ -1,20 +1,33 @@
-import { View, Text, StyleSheet, Pressable, } from 'react-native'
+import { View, Text, StyleSheet, Pressable, TouchableOpacity, FlatList, } from 'react-native'
 import React, { useState } from 'react'
 import { Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
-import { getMyBucketList } from '../services/plantDbService';
+import { getAllPlantsList, getMyBucketList } from '../services/plantDbService';
 
 export default function PlantListScreen({ navigation }) {
 
     const goToAdd = () => { navigation.navigate("Admin") }
 
-    const [bucketItems, setBucketItems] = useState([]) // creating a usestate
+    const [plantItems, setPlantItems] = useState([]) // creating a usestate
+
+    useFocusEffect(
+        React.useCallback(() => {
+            // Do something when the screen is focused
+            handleGettingOfData()
+            return () => {
+                // Do something when the screen is unfocused
+                // Useful for cleanup functions
+                // DO NOTHING
+            };
+        }, [])
+    );
 
     const handleGettingOfData = async () => {
-        var allData = await getMyBucketList()
+        var allData = await getAllPlantsList()
         // check other consol log in Dbservice above the return
-        console.log("All Data: " + allData) 
-        setBucketItems(allData) // set bucket items tot alldata
+        // console.log("All Data: " + allData) 
+        setPlantItems(allData) // set bucket items tot alldata
     }
 
     return (
@@ -25,9 +38,29 @@ export default function PlantListScreen({ navigation }) {
             </Pressable>
 
             {/* this is the card element */}
-           
+            {
+                // just so that if there is empty data it doesnt bug out
+                // first check if items is empty - if not empty then display map - empty then display text
+                plantItems != [] ? (
+                    plantItems.map((item, index) => (
 
-            <Text>PlantListScreen</Text>
+                        <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("PlantDetail",
+                            {
+                                itemID: item?.id, // here we are passing the data to the details page
+                                itemName: item?.name,
+                                itemDesc: item?.description, // here we are passing the data to the details page
+                                itemGrowth: item?.growthTime,
+                            }
+                        )}>
+                            <Text>{item.name}</Text>
+                            {/* // when the item is a priority the star must show - with if statement */}
+                            {item.priority ? <AntDesign name="star" size={24} color="orange" /> : null}
+                        </TouchableOpacity>
+                    ))
+                ) : (
+                    <Text>no items found</Text>
+                )
+            }
         </View>
     )
 }
@@ -41,15 +74,17 @@ const styles = StyleSheet.create({
         width: '100%',
         // backgroundColor:'gray',
         padding: 20,
+        gap: 20,
     },
     card: {
         width: '100%',
-        backgroundColor: 'white',
+        backgroundColor: '#F65774',
         padding: 15,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        borderRadius: 12,
     },
     addButton: {
         backgroundColor: 'white',

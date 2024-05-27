@@ -233,3 +233,10 @@ for native
 ```
 npm i @react-native-firebase/firestore
 ```
+
+# Date Picker
+
+Native install
+```
+npm i react-native-date-picker
+```

@@ -15,6 +15,7 @@ import PlantListScreen from "../plantListScreen";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import PlantDetailsScreen from "../plantDetailsScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -106,6 +107,7 @@ export function AdminStack() {
     <Stack.Navigator>
       <Stack.Screen name="PlantList" component={PlantListScreen} />
       <Stack.Screen name="Admin" component={AdminScreen} />
+      <Stack.Screen name="PlantDetail" component={PlantDetailsScreen} />
     </Stack.Navigator>
   )
 }
