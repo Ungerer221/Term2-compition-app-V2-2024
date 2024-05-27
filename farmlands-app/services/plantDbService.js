@@ -56,12 +56,31 @@ export const getPlantItem = async (itemID) => {
 
 // TODO : Update Functionality
 export const updatePlantItem = async (itemID) => {
-    const docRef = doc(db, "plants", itemID);
-    await updateDoc(docRef, {
-        name: '', // this is what we are changing 
-        description: '',
-        growthTime: '',
-    });
-    //   const docRef = await updateDoc(collection(db, "plants"), item);
-    //   console.log("Document written with ID: ", docRef.id);
+    try {
+        const docRef = doc(db, "plants", itemID);
+        await updateDoc(docRef, {
+            name: '', // this is what we are changing 
+            description: '',
+            growthTime: '',
+        });
+        console.log("Document Updated with ID: ", docRef.id);
+        return true //  be more specific on why 
+    } catch (e) {
+        console.error("Error Updating document: ", e);
+        // * : to navigate back to previous screen after filling in info
+        return false
+    }
 }
+// const updateForm = document.querySelector('.update')
+// updateForm.addEventListener('submit', (e)=>{
+//     e.preventDefault()
+
+//     const docRef = doc(db, 'plants', updateForm.id.value)
+
+//     updateDoc(docRef, {
+//         name:'update name'
+//     })
+//     .then(()=>{
+//         updateForm.reset()
+//     })
+// })

@@ -1,6 +1,7 @@
 
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
+import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
 
 export const handleSignup = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -16,4 +17,16 @@ export const handleSignup = (email, password) => {
             console.log(errorMessage)
             // ..
         });
+}
+
+// TODO : Create user in database
+export const createNewUser = async (item) => {
+    try {
+        const docRef = await addDoc(collection(db, "users"), item);
+        console.log("user created with ID: ", docRef.id);
+        return true
+    } catch (e) {
+        console.error("Error adding user: ", e);
+        return false
+    }
 }

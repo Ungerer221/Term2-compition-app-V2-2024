@@ -9,16 +9,21 @@ import PasswordInputField from '../components/passwordInputField';
 import EmailInputField from '../components/emailInputField';
 import UserNameInput from '../components/userNameInput';
 // firebase
-import { handleSignup } from '../services/signupService';
+import { createNewUser, handleSignup } from '../services/signupService';
 
 // todo : make the sign up screen part of the drawer navigation for the menu button
 export default function SignUpScreen({ navigation }) {
 
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState(''); // uses the onchange value
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const signUp = () => { handleSignup(email, password) }
+
+    const handleUserCreation = async () => {
+        var items = { username, email, password }
+        var success = await createNewUser(items)
+    }
 
     return (
         <View style={styles.container}>

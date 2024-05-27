@@ -25,6 +25,7 @@ export default function ProfileScreen() {
             <ProfilePicMain></ProfilePicMain>
             <View style={styles.userDataCon}>
               <Text style={styles.userDataTitle}>the Users Name</Text>
+              <Text style={styles.userDataBio}>email</Text>
               <Text style={styles.userDataBio}>Person bio</Text>
               <DateJoined></DateJoined>
             </View>

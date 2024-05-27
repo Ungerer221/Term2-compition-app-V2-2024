@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
-import { getPlantItem } from '../services/plantDbService'
+import { getPlantItem, updatePlantItem } from '../services/plantDbService'
 //  Icons
 import { Feather } from '@expo/vector-icons';
 import MenuSquareIcon from '../icons/menuSquareIcon';
@@ -15,6 +15,10 @@ export default function PlantDetailsScreen({ route, navigation }) {
     const [itemName, setItemName] = useState()
     const [itemDescription, setItemDescription] = useState()
     const [itemGrowth, setItemGrowth] = useState()
+
+    // * : for Updating in modal
+    const [name, setName] = useState()
+    const [description, setDescription] = useState()
 
     useFocusEffect(
         React.useCallback(() => {
@@ -40,6 +44,18 @@ export default function PlantDetailsScreen({ route, navigation }) {
         // console.log("Item Data: " + itemData) 
         setPlantItem(itemData)
     }
+
+    // * : Update
+    const handleUpdatingItemData = async (itemID) => {
+        var items = { name, description, }
+        var success = await updatePlantItem(items)
+        if (success) {
+            navigation.goBack()
+        } else {
+            // TODO : validation on why
+        }
+    }
+
 
     return (
         <View style={styles.container}>
@@ -81,6 +97,25 @@ export default function PlantDetailsScreen({ route, navigation }) {
                         {/* modal view */}
                         <View style={styles.modalView}>
                             <Text style={styles.modalText}>Update</Text>
+                            <View style={styles.modalFormCon}>
+                                <TextInput
+                                    style={styles.inputField}
+                                    placeholder="Plant Name"
+                                    onChangeText={newText => setName(newText)}
+                                    defaultValue={name}
+                                />
+                                <TextInput
+                                    multiline
+                                    numberOfLines={1}
+                                    style={styles.inputField}
+                                    placeholder="Description of bucket list"
+                                    onChangeText={newText => setDescription(newText)}
+                                    defaultValue={description}
+                                />
+                            </View>
+                            <TouchableOpacity style={styles.button} onPress={handleUpdatingItemData}>
+                                <Text style={styles.buttonText}>Create Plant Item</Text>
+                            </TouchableOpacity>
                             {/* close button */}
                             <Pressable
                                 style={[styles.button, styles.buttonClose]}
@@ -94,7 +129,7 @@ export default function PlantDetailsScreen({ route, navigation }) {
                     style={[styles.updateBtn, styles.buttonOpen]}
                     onPress={() => setModalVisible(true)}>
                     {/* <Text style={styles.textStyle}>Show Modal</Text> */}
-                    <MenuSquareIcon />
+                    {/* <MenuSquareIcon /> */}
                     <Text style={styles.updateBtnText}>Update Item</Text>
                 </Pressable>
             </View>
@@ -152,20 +187,19 @@ const styles = StyleSheet.create({
         // flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop:40,
+        marginTop: 40,
     },
     modalView: {
-        marginTop: 40,
         width: '95%',
         height: '100%',
         backgroundColor: 'white',
         // borderRadius: 20,
         borderTopLeftRadius: 22,
-        borderTopRightRadius:22,
+        borderTopRightRadius: 22,
         padding: 35,
         gap: 10,
         alignItems: 'center',
-        justifyContent:'flex-start',
+        justifyContent: 'flex-start',
         borderWidth: 2,
 
         // shadowColor: '#000',
@@ -187,4 +221,18 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: '#fff',
     },
+    modalFormCon:{
+        width:'100%',
+        gap:10,
+    },
+    inputField: {
+        padding: 15,
+        width: '100%',
+        backgroundColor: '#000',
+        borderRadius: 12,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        color: 'black',
+    }
 })

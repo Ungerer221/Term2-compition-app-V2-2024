@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image, TextInput, KeyboardAvoidingView,Platform,Keyboard, } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image, TextInput, KeyboardAvoidingView, Platform, Keyboard, } from 'react-native'
 import React, { useState } from 'react'
 // View
 import TopNavBar from '../views/topNavBar';
@@ -16,58 +16,58 @@ export default function LoginFormScreen({ navigation }) {
     const login = () => { handleLogin(email, password) }
 
     return (
-            <View style={styles.container}>
-                <TopNavBar />
-                <Text style={styles.loginHeadingText}>Login</Text>
-                <Text>If you dont have an account please feel free to register</Text>
-                <Image
-                    style={styles.backGroundImage}
-                    source={require('../assets/44.png')}
+        <View style={styles.container}>
+            <TopNavBar />
+            <Text style={styles.loginHeadingText}>Login</Text>
+            <Text>If you dont have an account please feel free to register</Text>
+            <Image
+                style={styles.backGroundImage}
+                source={require('../assets/44.png')}
+            />
+            {/* input field con */}
+            <View style={styles.formCon}>
+
+                {/* //* email */}
+                <TextInput
+                    style={styles.input}
+                    placeholder='email'
+                    onChangeText={newText => setEmail(newText)}
+                    value={email}
                 />
-                {/* input field con */}
-                <View style={styles.formCon}>
+                {/* //* pass word field */}
+                <TextInput
+                    style={styles.input}
+                    placeholder='password'
+                    onChangeText={newText => setPassword(newText)}
+                    value={password}
+                />
 
-                    {/* //* email */}
-                    <TextInput
-                        style={styles.input}
-                        placeholder='email'
-                        onChangeText={newText => setEmail(newText)}
-                        value={email}
-                    />
-                    {/* //* pass word field */}
-                    <TextInput
-                        style={styles.input}
-                        placeholder='password'
-                        onChangeText={newText => setPassword(newText)}
-                        value={password}
-                    />
-
-                    {/* //* submit button  */}
-                    <TouchableOpacity style={styles.loginButton} onPress={login}>
-                        <Text style={styles.loginButtonText}>Login</Text>
-                    </TouchableOpacity>
-                    {/* //* signUp button  */}
-                    <TouchableOpacity
-                        style={styles.navSignupButton}
-                        onPress={() => navigation.navigate('Signup')}
-                    >
-                        <Text style={styles.loginButtonText}>Create an account</Text>
-                    </TouchableOpacity>
-                    {/* <TouchableOpacity
+                {/* //* submit button  */}
+                <TouchableOpacity style={styles.loginButton} onPress={login}>
+                    <Text style={styles.loginButtonText}>Login</Text>
+                </TouchableOpacity>
+                {/* //* signUp button  */}
+                <TouchableOpacity
+                    style={styles.navSignupButton}
+                    onPress={() => navigation.navigate('Signup')}
+                >
+                    <Text style={styles.SignupButtonText}>Create an account</Text>
+                </TouchableOpacity>
+                {/* <TouchableOpacity
                         style={styles.navSignupButton}
                         onPress={() => navigation.navigate('Home')}
                     >
                         <Text style={styles.loginButtonText}>home</Text>
                     </TouchableOpacity> */}
-                    {/* //* Admin  */}
-                    <TouchableOpacity
-                        style={styles.navSignupButton}
-                        onPress={() => navigation.navigate('AdminStack')}
-                    >
-                        <Text style={styles.loginButtonText}>Admin</Text>
-                    </TouchableOpacity>
-                </View>
+                {/* //* Admin  */}
+                <TouchableOpacity
+                    style={styles.navAdminButton}
+                    onPress={() => navigation.navigate('AdminStack')}
+                >
+                    <Text style={styles.loginButtonText}>Admin</Text>
+                </TouchableOpacity>
             </View>
+        </View>
     )
 }
 const styles = StyleSheet.create({
@@ -108,12 +108,17 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     navSignupButton: {
-        width: '50%',
-        backgroundColor: '#F65774',
+        width: '70%',
+        // backgroundColor: '#A08BF6',
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
         borderRadius: 22,
+    },
+    SignupButtonText: {
+        color: "#F65774",
+        fontSize:20,
+        fontWeight:'700',
     },
     backGroundImage: {
         width: '100%',
@@ -126,5 +131,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 20,
         borderRadius: 12,
+    },
+    navAdminButton: {
+        // width: '50%',
+        backgroundColor: '#A08BF6',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        borderRadius: 22,
     },
 });
