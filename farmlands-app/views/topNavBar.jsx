@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
         flex: 0,
         width: '100%',
         // height:50,
-        // padding: 20,
+        paddingTop:10,
+        paddingHorizontal: 20,
         // backgroundColor: '#fff',
         // backgroundColor: 'red',
         alignItems: 'center',
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // backgroundColor: '#29C3CB',
         // padding: 10,
-        paddingLeft: 20,
+        // paddingLeft: 20,
         borderBottomRightRadius: 12,
     },
     nameText: {
@@ -101,7 +102,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         // backgroundColor: '#29C3CB',
-        padding: 10,
+        // padding: 10,
+        // paddingHorizontal:20,
         borderBottomLeftRadius: 12,
     },
     icon32: {

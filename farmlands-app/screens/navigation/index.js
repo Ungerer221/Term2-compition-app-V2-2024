@@ -16,6 +16,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import PlantDetailsScreen from "../plantDetailsScreen";
+import EnrollScreen from "../enrollScreen";
+import EnrollCompView from "../../views/enrollCompView";
+import TieIcon from "../../icons/tie-stroke-rounded";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,8 +31,8 @@ export function MyTab() {
         screenOptions={{ headerShown: false }}
       >
         <Tab.Screen
-          name="Home"
-          component={HomeScreen}
+          name="HomeStack"
+          component={HomeStack}
           options={{
             tabBarLabel: 'Home',
             tabBarIcon: ({ color, size }) => (
@@ -77,7 +80,8 @@ export function MyTab() {
           options={{
             tabBarLabel: 'Admin',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="newspaper-variant-outline" color={color} size={size} />
+              <MaterialCommunityIcons name="account-tie-outline" color={color} size={size} />
+              // <TieIcon/>
             ),
             tabBarActiveTintColor: '#F65774',
           }}
@@ -108,6 +112,16 @@ export function AdminStack() {
       <Stack.Screen name="PlantList" component={PlantListScreen} />
       <Stack.Screen name="Admin" component={AdminScreen} />
       <Stack.Screen name="PlantDetail" component={PlantDetailsScreen} />
+    </Stack.Navigator>
+  )
+}
+
+export function HomeStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="EnrollScreen" component={EnrollScreen} />
+      <Stack.Screen name="enroll" component={EnrollCompView}/>
     </Stack.Navigator>
   )
 }

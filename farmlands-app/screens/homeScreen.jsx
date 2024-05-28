@@ -18,6 +18,7 @@ import TractorIcon32 from '../icons/tractor-stroke-rounded.jsx';
 // import { Home01Icon } from '@hugeicons/react-native-pro';
 import { Home01Icon } from '../icons/HomeIcon.jsx';
 import { TabNavigator } from './homeTabNav/homeTabNav.js';
+import HelloMeetView from '../views/helloMeetView.jsx';
 // import { showErrorCSS } from 'react-native-svg/lib/typescript/deprecated.js';
 // images
 
@@ -31,9 +32,10 @@ export default function HomeScreen({ navigation }) {
                 {/* <View style={styles.colorBlock02}></View> */}
                 <View style={styles.backgroundColorBlock02}></View>
                 <TopNavBar></TopNavBar>
+                <HelloMeetView />
                 {/* <Text style={styles.homeIntroTitleText}>Welcome</Text> */}
-                <LeaderBoardView></LeaderBoardView>
                 <EnrollCompView />
+                <LeaderBoardView></LeaderBoardView>
                 {/* <Text style={styles.heading01}>your total score</Text> */}
                 <View style={styles.home02Con}>
                     {/* <TotalScoreTile></TotalScoreTile> */}

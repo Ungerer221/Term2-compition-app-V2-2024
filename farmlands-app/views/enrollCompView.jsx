@@ -2,8 +2,15 @@ import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image } from
 import React from 'react'
 // icons
 import Alert02Icon32 from '../icons/alert-02-stroke-rounded';
+// navigation
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native'; // this solved the problem of navigation from a view
 
 export default function EnrollCompView() {
+
+    const navigation = useNavigation(); // this solved the problem of navigation from a view see : https://stackoverflow.com/questions/71562840/typeerror-cannot-read-property-navigate-of-undefined-react-native
+
     return (
         <View style={styles.container}>
             {/* enroll banner  */}
@@ -20,7 +27,7 @@ export default function EnrollCompView() {
                 <Text style={styles.enrollBannerMainText}>Enter The Competition</Text>
                 <TouchableOpacity
                     style={styles.enrollSignButton}
-
+                    onPress={() => navigation.navigate('EnrollScreen')}
                 >
                     <Text style={styles.enrollSignButtonText}>Signup</Text>
                 </TouchableOpacity>
@@ -58,7 +65,7 @@ const styles = StyleSheet.create({
         gap: 20,
         overflow: 'hidden',
         borderRadius: 22,
-        width: 350,
+        width: 370,
         backgroundColor: '#fff',
 
     },
