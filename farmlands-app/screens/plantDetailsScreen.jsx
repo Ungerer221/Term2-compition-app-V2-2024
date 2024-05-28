@@ -65,19 +65,19 @@ export default function PlantDetailsScreen({ route, navigation }) {
     }
 
     // TODO : Delete Item function
-    const handleDelete = async (itemID)=> {
-        var deleted = await deletePlantItem(itemID)
-        if(deleted){
-            console.log("item Deleted Successful:" + itemID)
-        }else {
-            console.error("failed to delete")
-        }
-    }
-    // const handleDelete = async (itemID) => {
-    //     var plantData = await deletePlant(itemID)
-    //     setPlantItem(plantData)
-    //     // deletePlant('YOUR_PLANT_ID');
-    // };
+    // const handleDelete = async (itemID)=> {
+    //     var deleted = await deletePlantItem(itemID)
+    //     if(deleted){
+    //         console.log("item Deleted Successful:" + itemID)
+    //     }else {
+    //         console.error("failed to delete")
+    //     }
+    // }
+    const handleDelete = async (itemId) => {
+        // var plantData = await deletePlant(itemID)
+        // setPlantItem(plantData)
+        deletePlant(itemId);
+    };
     // const handleDelete = (id) => {
     //     // Call the delete function with the document ID to delete
     //     deletePlant(id);

@@ -23,6 +23,7 @@ export const createNewPlantItem = async (item) => {
 
 
 // * : get all items 
+// ? : is there a way to use this to get single item data
 export const getAllPlantsList = async () => {
     var allPlants = []
 
@@ -30,7 +31,7 @@ export const getAllPlantsList = async () => {
     const querySnapShot = await getDocs(q);
 
     querySnapShot.forEach((doc) => {
-        allPlants.push({ ...doc.data(), id: doc.id }) // ? : is there a way to use this to get single item data
+        allPlants.push({ ...doc.data(), id: doc.id })
     });
     // console.log(allPlants)
     return allPlants
@@ -86,12 +87,12 @@ export const updatePlantItem = async (itemID) => {
 // })
 
 // TODO : Delete FUnctionality
-export const deletePlant = async (itemID) => {
+export const deletePlant = async (plantId) => {
     try {
         //   await Firestore().collection('plants').doc(itemID).delete();
-        // await deleteDoc(doc(db, "plants", itemID));
-        const docRef = doc(db, "plants", itemID);
-        const docSnap = await deleteDoc(docRef);
+        await deleteDoc(doc(db, "plants", plantId));
+        // const docRef = doc(db, "plants", itemID.id);
+        // const docSnap = await deleteDoc(docRef);
         console.log('Document successfully deleted!');
     } catch (error) {
         console.error('Error deleting document: ', error);
