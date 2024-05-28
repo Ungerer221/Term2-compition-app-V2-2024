@@ -1,6 +1,6 @@
-import { collection, addDoc, getDocs, query, orderBy, } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, orderBy, Firestore, } from "firebase/firestore";
 import { db } from "../config/firebase";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 
 // * : create new list itm function 
 export const createNewPlantItem = async (item) => {
@@ -30,7 +30,7 @@ export const getAllPlantsList = async () => {
     const querySnapShot = await getDocs(q);
 
     querySnapShot.forEach((doc) => {
-        allPlants.push({ ...doc.data(), id: doc.id })
+        allPlants.push({ ...doc.data(), id: doc.id }) // ? : is there a way to use this to get single item data
     });
     // console.log(allPlants)
     return allPlants
@@ -84,3 +84,16 @@ export const updatePlantItem = async (itemID) => {
 //         updateForm.reset()
 //     })
 // })
+
+// TODO : Delete FUnctionality
+export const deletePlant = async (itemID) => {
+    try {
+        //   await Firestore().collection('plants').doc(itemID).delete();
+        // await deleteDoc(doc(db, "plants", itemID));
+        const docRef = doc(db, "plants", itemID);
+        const docSnap = await deleteDoc(docRef);
+        console.log('Document successfully deleted!');
+    } catch (error) {
+        console.error('Error deleting document: ', error);
+    }
+};

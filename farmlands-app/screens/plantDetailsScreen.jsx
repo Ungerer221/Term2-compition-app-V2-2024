@@ -1,17 +1,19 @@
 import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, TextInput } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
-import { getPlantItem, updatePlantItem } from '../services/plantDbService'
+import { deletePlant, deletePlantItem, getPlantItem, updatePlantItem } from '../services/plantDbService'
 //  Icons
 import { Feather } from '@expo/vector-icons';
 import MenuSquareIcon from '../icons/menuSquareIcon';
 import DashedLine02Icon from '../icons/dashed-line-02-stroke-rounded';
+import { Firestore, doc, getFirestore } from '@firebase/firestore';
 
 export default function PlantDetailsScreen({ route, navigation }) {
 
     const [modalVisible, setModalVisible] = useState(false);
 
     const [plantItem, setPlantItem] = useState([]) // creating a usestate
+    const [itemId, setItemId] = useState()
     const [itemName, setItemName] = useState()
     const [itemDescription, setItemDescription] = useState()
     const [itemGrowth, setItemGrowth] = useState()
@@ -26,6 +28,7 @@ export default function PlantDetailsScreen({ route, navigation }) {
             // console.log("Route", itemDesc)
             // Do something when the screen is focused
             handleGettingOfItemData(itemID) // getting the data that is being passed through
+            setItemId(itemID)
             setItemName(itemName)
             setItemDescription(itemDesc) // getting the data that is being passed through
             setItemGrowth(itemGrowth) // getting the data that is being passed through
@@ -37,6 +40,11 @@ export default function PlantDetailsScreen({ route, navigation }) {
             };
         }, [])
     );
+
+    // useEffect(() => {
+    //     const { itemID } = route.params;
+    //     handleDelete(itemID)
+    // }, [])
 
     const handleGettingOfItemData = async (itemID) => {
         var itemData = await getPlantItem(itemID)
@@ -56,9 +64,33 @@ export default function PlantDetailsScreen({ route, navigation }) {
         }
     }
 
+    // TODO : Delete Item function
+    const handleDelete = async (itemID)=> {
+        var deleted = await deletePlantItem(itemID)
+        if(deleted){
+            console.log("item Deleted Successful:" + itemID)
+        }else {
+            console.error("failed to delete")
+        }
+    }
+    // const handleDelete = async (itemID) => {
+    //     var plantData = await deletePlant(itemID)
+    //     setPlantItem(plantData)
+    //     // deletePlant('YOUR_PLANT_ID');
+    // };
+    // const handleDelete = (id) => {
+    //     // Call the delete function with the document ID to delete
+    //     deletePlant(id);
+    //   };
 
     return (
         <View style={styles.container}>
+            <View style={styles.textCon}>
+                <Text style={styles.textConText}>ID : </Text>
+                <View style={styles.textCon02}>
+                    <Text style={styles.textConText02}>{itemId}</Text>
+                </View>
+            </View>
             <View style={styles.textCon}>
                 <Text style={styles.textConText}>Name : </Text>
                 <View style={styles.textCon02}>
@@ -133,6 +165,11 @@ export default function PlantDetailsScreen({ route, navigation }) {
                     <Text style={styles.updateBtnText}>Update Item</Text>
                 </Pressable>
             </View>
+            <Pressable
+                onPress={handleDelete}
+                style={styles.deleteBtn}>
+                <Text style={styles.updateBtnText}>Delete</Text>
+            </Pressable>
         </View>
     )
 }
@@ -221,9 +258,9 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: '#fff',
     },
-    modalFormCon:{
-        width:'100%',
-        gap:10,
+    modalFormCon: {
+        width: '100%',
+        gap: 10,
     },
     inputField: {
         padding: 15,
@@ -234,5 +271,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         color: 'black',
+    },
+    deleteBtn: {
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 12,
+        paddingHorizontal: 20,
+        paddingVertical: 15,
+        backgroundColor: '#F65774',
     }
 })
