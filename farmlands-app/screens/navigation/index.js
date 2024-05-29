@@ -19,6 +19,10 @@ import PlantDetailsScreen from "../plantDetailsScreen";
 import EnrollScreen from "../enrollScreen";
 import EnrollCompView from "../../views/enrollCompView";
 import TieIcon from "../../icons/tie-stroke-rounded";
+import AdminNavScreen from "../adminNavScreen";
+import CompListScreen from "../compListScreen";
+import CompDetailsScreen from "../compDetailsScreen";
+import CompAddScreen from "../compAddScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -109,9 +113,13 @@ export function MyStack() {
 export function AdminStack() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="AdminNav" component={AdminNavScreen} />
       <Stack.Screen name="PlantList" component={PlantListScreen} />
       <Stack.Screen name="Admin" component={AdminScreen} />
       <Stack.Screen name="PlantDetail" component={PlantDetailsScreen} />
+      <Stack.Screen name="CompList" component={CompListScreen} />
+      <Stack.Screen name="CompDetail" component={CompDetailsScreen} />
+      <Stack.Screen name="CompAdd" component={CompAddScreen} />
     </Stack.Navigator>
   )
 }
@@ -121,7 +129,7 @@ export function HomeStack() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="EnrollScreen" component={EnrollScreen} />
-      <Stack.Screen name="enroll" component={EnrollCompView}/>
+      <Stack.Screen name="enroll" component={EnrollCompView} />
     </Stack.Navigator>
   )
 }

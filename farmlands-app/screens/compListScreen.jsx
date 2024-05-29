@@ -1,65 +1,64 @@
-import { View, Text, StyleSheet, Pressable, TouchableOpacity, FlatList, } from 'react-native'
+import { View, Text, StyleSheet, Pressable, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { Entypo } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { useFocusEffect } from '@react-navigation/native';
-import { getAllPlantsList, getMyBucketList } from '../services/plantDbService';
+import { useFocusEffect } from '@react-navigation/native'
+import { getAllCompsList } from '../services/compDbService'
 // icons
 import AddCircleHalfDotIcon from '../icons/add-circle-half-dot-stroke-rounded'
 import Menu01IconList from '../icons/menu-01-stroke-rounded'
 
-export default function PlantListScreen({ navigation }) {
+export default function CompListScreen({ navigation }) {
 
-    const goToAdd = () => { navigation.navigate("Admin") }
+    const goToAdd = () => { navigation.navigate("CompAdd") }
 
-    const [plantItems, setPlantItems] = useState([]) // creating a usestate
+    const [compItems, setCompItems] = useState([])
 
+    // ? what is a call back
     useFocusEffect(
         React.useCallback(() => {
             // Do something when the screen is focused
-            handleGettingOfData()
+            handleGettingOfCompData()
             return () => {
                 // Do something when the screen is unfocused
                 // Useful for cleanup functions
                 // DO NOTHING
-            };
-        }, [])
-    );
+            }
+        })
+    )
 
-    const handleGettingOfData = async () => {
-        var allData = await getAllPlantsList()
-        // check other consol log in Dbservice above the return
-        // console.log("All Data: " + allData) 
-        setPlantItems(allData) // set bucket items tot alldata
+    const handleGettingOfCompData = async () => {
+        var allCompData = await getAllCompsList()
+        setCompItems(allCompData)
     }
 
     return (
         <View style={styles.container}>
             <View style={styles.infoCon}>
-                <Text style={styles.titleText01}>PlantListScreen</Text>
+                <Text style={styles.titleText01}>CompListScreen</Text>
                 <Menu01IconList />
             </View>
             <Pressable style={styles.addButton} onPress={goToAdd}>
+                {/* <Text style={styles.addButtonText}>Add</Text> */}
                 <AddCircleHalfDotIcon />
             </Pressable>
-
             {/* this is the card element */}
             <View style={styles.cardCon}>
                 <View >
-                    <Text style={styles.cardConInfoText}>Plants</Text>
+                    <Text style={styles.cardConInfoText}>Current Compitions</Text>
                 </View>
                 {
                     // just so that if there is empty data it doesnt bug out
                     // first check if items is empty - if not empty then display map - empty then display text
-                    plantItems != [] ? (
-                        plantItems.map((item, index) => (
+                    compItems != [] ? (
+                        compItems.map((item, index) => (
 
-                            <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("PlantDetail",
+                            <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("CompDetail",
                                 {
                                     itemID: item?.id, // here we are passing the data to the details page
                                     itemName: item?.name,
                                     itemDesc: item?.description, // here we are passing the data to the details page
-                                    itemGrowth: item?.growthTime,
+                                    itemEndDay: item?.endDay,
+                                    itemEndMonth: item?.endMonth,
+                                    itemEndYear: item?.endYear,
                                 }
                             )}>
                                 <Text>{item.name}</Text>
@@ -75,7 +74,6 @@ export default function PlantListScreen({ navigation }) {
         </View>
     )
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -115,12 +113,10 @@ const styles = StyleSheet.create({
         padding: 20,
         flexDirection: 'row',
         gap: 10,
-        backgroundColor: '#8CC86E'
+        backgroundColor: '#9CCCFF'
     },
     addButtonText: {
-        textAlign: 'center',
-        color: 'black',
-        fontWeight: 'bold'
+        fontSize: 24,
     },
     infoCon: {
         width: '100%',
@@ -136,7 +132,7 @@ const styles = StyleSheet.create({
         fontWeight: '900',
         width: 200,
     },
-    cardConInfoText:{
+    cardConInfoText: {
         fontSize: 24,
         fontWeight: '700',
     },
