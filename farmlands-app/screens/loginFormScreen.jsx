@@ -22,30 +22,32 @@ export default function LoginFormScreen({ navigation }) {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.container}>
                     <TopNavBar />
-
-                    <Text style={styles.loginHeadingText}>Login</Text>
-                    <Text>If you dont have an account please feel free to register</Text>
+                    <View style={styles.infoCon}>
+                        <Text style={styles.loginHeadingText}>Login</Text>
+                        <Text>If you dont have an account please feel free to register</Text>
+                    </View>
                     <Image
                         style={styles.backGroundImage}
                         source={require('../assets/44.png')}
                     />
                     {/* input field con */}
                     <View style={styles.formCon}>
-
-                        {/* //* email */}
-                        <TextInput
-                            style={styles.input}
-                            placeholder='email'
-                            onChangeText={newText => setEmail(newText)}
-                            value={email}
-                        />
-                        {/* //* pass word field */}
-                        <TextInput
-                            style={styles.input}
-                            placeholder='password'
-                            onChangeText={newText => setPassword(newText)}
-                            value={password}
-                        />
+                        <View style={styles.inputCon}>
+                            {/* //* email */}
+                            <TextInput
+                                style={styles.input}
+                                placeholder='email'
+                                onChangeText={newText => setEmail(newText)}
+                                value={email}
+                            />
+                            {/* //* pass word field */}
+                            <TextInput
+                                style={styles.input}
+                                placeholder='password'
+                                onChangeText={newText => setPassword(newText)}
+                                value={password}
+                            />
+                        </View>
 
                         {/* //* submit button  */}
                         <TouchableOpacity style={styles.loginButton} onPress={login}>
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        height:'100%',
+        height: '100%',
         backgroundColor: '#fff',
         // backgroundColor: '#90F6DE',
         alignItems: 'center',
@@ -104,24 +106,26 @@ const styles = StyleSheet.create({
     },
     loginButton: {
         width: '100%',
-        backgroundColor: '#41A8BB',
+        backgroundColor: '#9CCCFF',
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
         borderRadius: 22,
+        borderWidth: 2,
     },
     loginButtonText: {
-        color: '#fff',
+        // color: '#fff',
         fontWeight: '700',
         fontSize: 16,
     },
     navSignupButton: {
-        width: '70%',
+        width: '100%',
         // backgroundColor: '#A08BF6',
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
         borderRadius: 22,
+        borderWidth: 2,
     },
     SignupButtonText: {
         color: "#F65774",
@@ -135,17 +139,30 @@ const styles = StyleSheet.create({
     },
     input: {
         width: '100%',
-        margin: 12,
-        borderWidth: 1,
+        // margin: 12,
+        borderWidth: 2,
         padding: 20,
         borderRadius: 12,
     },
     navAdminButton: {
-        // width: '50%',
+        width: '50%',
         backgroundColor: '#A08BF6',
         justifyContent: 'center',
         alignItems: 'center',
         padding: 10,
-        borderRadius: 22,
+        borderRadius: 16,
+        borderWidth: 2,
     },
+    infoCon: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        borderRadius: 16,
+        borderWidth: 2,
+    },
+    inputCon:{
+        width:'100%',
+        gap:10,
+        paddingVertical:20,
+    }
 });
