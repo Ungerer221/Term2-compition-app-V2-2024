@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 
 
@@ -16,6 +16,27 @@ export const handleLogin = (email, password) => {
             console.log(errorMessage)
         });
 }
+
+// TODO : Logout Function
+export const handleLogout = () => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+        // Sign-out successful.
+        console.log('User signed out successfully');
+    }).catch((error) => {
+        // An error happened.
+        console.error('Error signing out:', error);
+    });
+    // try {
+    //     await signOut(auth);
+    //     console.log('User signed out successfully');
+    //     // You can navigate to another screen or update the state as needed after logout
+    // } catch (error) {
+    //     console.error('Error signing out:', error);
+    // }
+    console.log("Executed Function")
+}
+
 
 // to log out
 // export const handleSignout = () => {

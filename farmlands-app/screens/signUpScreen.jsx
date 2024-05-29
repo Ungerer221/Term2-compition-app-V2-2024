@@ -18,12 +18,13 @@ export default function SignUpScreen({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const signUp = () => { handleSignup(email, password) }
-
+    
     const handleUserCreation = async () => {
         var items = { username, email, password }
         var success = await createNewUser(items)
     }
+    
+    const signUp = () => { handleSignup(email, password), handleUserCreation }
 
     return (
         <View style={styles.container}>

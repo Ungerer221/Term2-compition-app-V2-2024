@@ -13,6 +13,7 @@ export default function CompAddScreen() {
     const [endMonth, setEndMonth] = useState('')
     const [endYear, setEndYear] = useState('')
     // TODO : the enroll will be booleen and will be set to fals eand when user enrols set to true
+    
 
     const handleCompCreation = async () => {
         var items = { name, description, endDay, endMonth, endYear }

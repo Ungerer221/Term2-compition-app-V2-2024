@@ -49,7 +49,8 @@ export default function LeaderBoardView() {
 const styles = StyleSheet.create({
     container: {
         // width: '100%',
-        width: 390,
+        margin:'auto',
+        width: 370,
         // height: 370,
         backgroundColor: 'red',
         flex: 0,

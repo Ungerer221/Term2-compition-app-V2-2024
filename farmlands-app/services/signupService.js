@@ -19,7 +19,7 @@ export const handleSignup = (email, password) => {
         });
 }
 
-// TODO : Create user in database
+// TODO : Create user in database as the user signs up
 export const createNewUser = async (item) => {
     try {
         const docRef = await addDoc(collection(db, "users"), item);

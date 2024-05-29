@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet, ScrollView, Image, } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, } from 'react-native'
+import React, { useState } from 'react'
+import { auth, getAuth } from "../config/firebase";
 // views
 import TopNavBar from '../views/topNavBar';
 // componenets
@@ -11,8 +12,19 @@ import TotalScoreBar from '../views/totalScoreBar';
 import LeaderBoardView from '../views/leaderBoardView';
 import StatsBoardView from '../views/statsBoardView';
 import BadgesTab from '../views/badgesTab';
+import LogoutCircle02Icon from '../icons/logout-circle-02-stroke-rounded';
+import { handleLogout } from '../services/authService';
 
 export default function ProfileScreen() {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const logout = () => {
+    handleLogout(email, password)
+    console.log("pressed")
+  }
+
   return (
     // could try a view behind the scroll view to add background elements that arent affected by scroll
     <ScrollView >
@@ -58,6 +70,14 @@ export default function ProfileScreen() {
               <DividerBar />
               <StatsBoardView />
             </View>
+            <View style={styles.DangerBox}>
+              <Text style={styles.dashBoardSecTextDanger}>Danger Zone</Text>
+            </View>
+            <DividerBar />
+            <TouchableOpacity style={styles.LogoutButton} onPress={logout}>
+              <Text style={styles.LogoutButtonText}>Log Out</Text>
+              <LogoutCircle02Icon />
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -161,6 +181,7 @@ const styles = StyleSheet.create({
   dasBoardSecContentCon: {
     paddingTop: 20,
     gap: 20,
+    width: '100%',
     // flex:0,
     // justifyContent:'center',
     // alignItems:'center',
@@ -170,5 +191,32 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: 'black',
     opacity: 0.7,
+  },
+  dashBoardSecTextDanger: {
+    color: '#f46987',
+    fontSize: 32,
+    fontWeight: '900',
+  },
+  LogoutButton: {
+    borderRadius: 12,
+    borderWidth: 2,
+    padding: 20,
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#f64987'
+  },
+  LogoutButtonText: {
+    fontSize: 20,
+    fontWeight: '700',
+    // color:'#fff'
+  },
+  DangerBox:{
+    borderWidth:2,
+    borderRadius:22,
+    padding:10,
+    justifyContent:'center',
+    alignItems:'center',
   }
 });
