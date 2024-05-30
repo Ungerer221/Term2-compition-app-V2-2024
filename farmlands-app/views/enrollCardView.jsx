@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import React from 'react'
 import Sun01Icon from '../icons/sun-01-stroke-rounded'
 
@@ -30,6 +30,8 @@ export default function EnrollCardView() {
                 </View>
             </View>
             <View>
+                {/* // TODO : when pressing this button it will change the users enrolment in the activity from false to true */}
+                {/* // TODO : check Data routing. The user must be linked to the Competition data */}
                 <TouchableOpacity style={styles.enrollBtn}>
                     <Text style={styles.enrollBtnText}>participate</Text>
                 </TouchableOpacity>

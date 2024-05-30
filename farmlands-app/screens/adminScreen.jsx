@@ -71,7 +71,7 @@ export default function AdminScreen() {
             />
 
             <DateTimePicker
-                value={new Date()}
+                value={date}
                 onChange={(evt, selectedDate) => {
                     setDate(selectedDate);
                 }}

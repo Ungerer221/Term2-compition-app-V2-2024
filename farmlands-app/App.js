@@ -40,6 +40,8 @@ import { auth } from './config/firebase';
 // todo : better your react navigation
 // todo : figure out nesting for navigation and then stack navigation
 // todo : add back buttons 
+// TODO : Add a testing button to add score to the users profile : you can have a collection in a document
+// TODO : find out the rreal problen to the get single item and the sending data trhoug to details page, isn't actually get sigle item 
 
 // * Tab navigator ------------------------------------------------------------------------------------------------------------------------
 const Tab = createBottomTabNavigator();

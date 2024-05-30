@@ -13,6 +13,7 @@ export default function CompListScreen({ navigation }) {
     const [compItems, setCompItems] = useState([])
 
     // ? what is a call back
+    // https://reactnavigation.org/docs/navigation-lifecycle/
     useFocusEffect(
         React.useCallback(() => {
             // Do something when the screen is focused

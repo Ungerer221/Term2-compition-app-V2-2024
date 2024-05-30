@@ -34,7 +34,7 @@ export default function CompDetailsScreen({ route, navigation }) {
         })
     )
 
-    // get item data
+    // get item data : getting from scratch // TODO : Check this if it is nessecery and if its working
     const handleGettingCompItemData = async (itemID) => {
         var itemData = await getCompItem(itemID)
         setCompItem(itemData)

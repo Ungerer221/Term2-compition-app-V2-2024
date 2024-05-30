@@ -15,6 +15,8 @@ import BadgesTab from '../views/badgesTab';
 import LogoutCircle02Icon from '../icons/logout-circle-02-stroke-rounded';
 import { handleLogout } from '../services/authService';
 
+// TODO : Pass user data through here to profile page and display the data : check the data passing method used in the details pages
+
 export default function ProfileScreen() {
 
   const [email, setEmail] = useState('');
