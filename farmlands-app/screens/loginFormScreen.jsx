@@ -22,57 +22,61 @@ export default function LoginFormScreen({ navigation }) {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.container}>
                     <TopNavBar />
-                    <View style={styles.infoCon}>
-                        <Text style={styles.loginHeadingText}>Login</Text>
-                        <Text>If you dont have an account please feel free to register</Text>
-                    </View>
-                    <Image
-                        style={styles.backGroundImage}
-                        source={require('../assets/44.png')}
-                    />
-                    {/* input field con */}
-                    <View style={styles.formCon}>
-                        <View style={styles.inputCon}>
-                            {/* //* email */}
-                            <TextInput
-                                style={styles.input}
-                                placeholder='email'
-                                onChangeText={newText => setEmail(newText)}
-                                value={email}
-                            />
-                            {/* //* pass word field */}
-                            <TextInput
-                                style={styles.input}
-                                placeholder='password'
-                                onChangeText={newText => setPassword(newText)}
-                                value={password}
-                            />
-                        </View>
+                    <View style={styles.innerContainer}>
 
-                        {/* //* submit button  */}
-                        <TouchableOpacity style={styles.loginButton} onPress={login}>
-                            <Text style={styles.loginButtonText}>Login</Text>
-                        </TouchableOpacity>
-                        {/* //* signUp button  */}
-                        <TouchableOpacity
-                            style={styles.navSignupButton}
-                            onPress={() => navigation.navigate('Signup')}
-                        >
-                            <Text style={styles.SignupButtonText}>Create an account</Text>
-                        </TouchableOpacity>
-                        {/* <TouchableOpacity
+
+                        <View style={styles.infoCon}>
+                            <Text style={styles.loginHeadingText}>Login</Text>
+                            <Text>If you dont have an account please feel free to register</Text>
+                        </View>
+                        <Image
+                            style={styles.backGroundImage}
+                            source={require('../assets/44.png')}
+                        />
+                        {/* input field con */}
+                        <View style={styles.formCon}>
+                            <View style={styles.inputCon}>
+                                {/* //* email */}
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder='email'
+                                    onChangeText={newText => setEmail(newText)}
+                                    value={email}
+                                />
+                                {/* //* pass word field */}
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder='password'
+                                    onChangeText={newText => setPassword(newText)}
+                                    value={password}
+                                />
+                            </View>
+
+                            {/* //* submit button  */}
+                            <TouchableOpacity style={styles.loginButton} onPress={login}>
+                                <Text style={styles.loginButtonText}>Login</Text>
+                            </TouchableOpacity>
+                            {/* //* signUp button  */}
+                            <TouchableOpacity
+                                style={styles.navSignupButton}
+                                onPress={() => navigation.navigate('Signup')}
+                            >
+                                <Text style={styles.SignupButtonText}>Create an account</Text>
+                            </TouchableOpacity>
+                            {/* <TouchableOpacity
                         style={styles.navSignupButton}
                         onPress={() => navigation.navigate('Home')}
                     >
                         <Text style={styles.loginButtonText}>home</Text>
                     </TouchableOpacity> */}
-                        {/* //* Admin  */}
-                        <TouchableOpacity
-                            style={styles.navAdminButton}
-                            onPress={() => navigation.navigate('AdminStack')}
-                        >
-                            <Text style={styles.loginButtonText}>Admin</Text>
-                        </TouchableOpacity>
+                            {/* //* Admin  */}
+                            <TouchableOpacity
+                                style={styles.navAdminButton}
+                                onPress={() => navigation.navigate('AdminStack')}
+                            >
+                                <Text style={styles.loginButtonText}>Admin</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -90,6 +94,15 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         // gap: 20,
         paddingTop: 20,
+        padding:5,
+    },
+    innerContainer:{
+        width:'100%',
+        height:'90%',
+        borderWidth:2,
+        borderRadius:22,
+        padding:10,
+        marginTop:10,
     },
     loginHeadingText: {
         fontSize: 42,
@@ -160,9 +173,9 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         borderWidth: 2,
     },
-    inputCon:{
-        width:'100%',
-        gap:10,
-        paddingVertical:20,
+    inputCon: {
+        width: '100%',
+        gap: 10,
+        paddingVertical: 20,
     }
 });
