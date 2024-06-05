@@ -36,19 +36,3 @@ export const handleLogout = () => {
     // }
     console.log("Executed Function")
 }
-
-
-// to log out
-// export const handleSignout = () => {
-//     getAuth()
-//         .revokeRefreshTokens(uid)
-//         .then(() => {
-//             return getAuth().getUser(uid);
-//         })
-//         .then((userRecord) => {
-//             return new Date(userRecord.tokensValidAfterTime).getTime() / 1000;
-//         })
-//         .then((timestamp) => {
-//             console.log(`Tokens revoked at: ${timestamp}`);
-//         });
-// }

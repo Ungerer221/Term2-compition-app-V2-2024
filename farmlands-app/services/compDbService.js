@@ -32,16 +32,16 @@ export const getAllCompsList = async () => {
 }
 
 // TODO : Get single item 
-export const getCompItem = async (itemID) => {
-    const docRef = doc(db, "competitions", itemID);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-        // console.log("Document data:", docSnap.data());
-    } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-    }
-}
+// export const getCompItem = async (itemID) => {
+//     const docRef = doc(db, "competitions", itemID);
+//     const docSnap = await getDoc(docRef);
+//     if (docSnap.exists()) {
+//         // console.log("Document data:", docSnap.data());
+//     } else {
+//         // docSnap.data() will be undefined in this case
+//         console.log("No such document!");
+//     }
+// }
 
 // TODO : UPdate function
 

@@ -24,7 +24,7 @@ export default function CompDetailsScreen({ route, navigation }) {
         React.useCallback(() => {
             const { itemID, itemName, itemDesc, itemEndDay, itemEndMonth, itemEndYear, } = route.params;
 
-            handleGettingCompItemData(itemID)
+            // handleGettingCompItemData(itemID)
             setItemId(itemID)
             setItemName(itemName)
             setItemDescription(itemDesc)
@@ -34,16 +34,17 @@ export default function CompDetailsScreen({ route, navigation }) {
         })
     )
 
+    // ! these dont do anything 
     // get item data : getting from scratch // TODO : Check this if it is nessecery and if its working
-    const handleGettingCompItemData = async (itemID) => {
-        var itemData = await getCompItem(itemID)
-        setCompItem(itemData)
-    }
+    // const handleGettingCompItemData = async (itemID) => {
+    //     var itemData = await getCompItem(itemID)
+    //     setCompItem(itemData)
+    // }
 
-    const handleDeleteCompItem = async (itemID)=>{
-        var itemData = await deleteCompItem(itemID)
-        setCompItem(itemData)
-    }
+    // const handleDeleteCompItem = async (itemID)=>{
+    //     var itemData = await deleteCompItem(itemID)
+    //     setCompItem(itemData)
+    // }
 
     return (
         <View style={styles.container}>
@@ -87,7 +88,7 @@ export default function CompDetailsScreen({ route, navigation }) {
 
                 <TouchableOpacity
                     style={styles.deleteButton}
-                    onPress={handleDeleteCompItem}
+                    // onPress={handleDeleteCompItem}
                 >
                     {/* <Text>Delete</Text> */}
                     <Delete02IconW />

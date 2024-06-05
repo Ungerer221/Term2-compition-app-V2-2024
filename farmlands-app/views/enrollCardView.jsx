@@ -1,41 +1,73 @@
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Sun01Icon from '../icons/sun-01-stroke-rounded'
+import { useFocusEffect } from '@react-navigation/native'
+import { getAllCompsList } from '../services/compDbService'
 
 export default function EnrollCardView() {
+
+    const [compItems, setCompItems] = useState([])
+
+    useFocusEffect(
+        React.useCallback(() => {
+            handleGettingOfCompData()
+            return () => {
+                // Do something when the screen is unfocused
+                // Useful for cleanup functions
+                // DO NOTHING
+            }
+        })
+    )
+
+    const handleGettingOfCompData = async () => {
+        var allCompData = await getAllCompsList()
+        setCompItems(allCompData)
+    }
+
     return (
-        <View style={styles.enrollCard}>
-            <View style={styles.enrollCardTitleRow}>
-                <View style={styles.enrollCardTitleCon}>
-                    <Text style={styles.enrollCardTitle}>Daily Competition</Text>
-                    <Text style={styles.enrollText03}>(1/7)</Text>
-                </View>
-                <Sun01Icon />
-            </View>
-            <Text>Collect $100000</Text>
-            <View style={styles.enrollDateMainContainer}>
-                <Text style={styles.enrollText03}>End Date:</Text>
-                <View style={styles.enrollCardDateCon}>
-                    <View style={styles.enrollCardDateBlock}>
-                        <Text style={styles.enrollText02}>28</Text>
-                    </View>
-                    <Text style={styles.enrollText02}>:</Text>
-                    <View style={styles.enrollCardDateBlock}>
-                        <Text style={styles.enrollText02}>05</Text>
-                    </View>
-                    <Text style={styles.enrollText02}>:</Text>
-                    <View style={styles.enrollCardDateBlock}>
-                        <Text style={styles.enrollText02}>2024</Text>
-                    </View>
-                </View>
-            </View>
-            <View>
-                {/* // TODO : when pressing this button it will change the users enrolment in the activity from false to true */}
-                {/* // TODO : check Data routing. The user must be linked to the Competition data */}
-                <TouchableOpacity style={styles.enrollBtn}>
-                    <Text style={styles.enrollBtnText}>participate</Text>
-                </TouchableOpacity>
-            </View>
+        <View style={styles.cardCon}>
+            {
+                compItems != [] ? (
+                    compItems.map((item, index) => (
+
+                        <View style={styles.enrollCard} key={index}>
+                            <View style={styles.enrollCardTitleRow}>
+                                <View style={styles.enrollCardTitleCon}>
+                                    <Text style={styles.enrollCardTitle}>{item.name}</Text>
+                                    <Text style={styles.enrollText03}>(1/7)</Text>
+                                </View>
+                                <Sun01Icon />
+                            </View>
+                            <Text>{item.description}</Text>
+                            <View style={styles.enrollDateMainContainer}>
+                                <Text style={styles.enrollText03}>End Date:</Text>
+                                <View style={styles.enrollCardDateCon}>
+                                    <View style={styles.enrollCardDateBlock}>
+                                        <Text style={styles.enrollText02}>{item.endDay}</Text>
+                                    </View>
+                                    <Text style={styles.enrollText02}>:</Text>
+                                    <View style={styles.enrollCardDateBlock}>
+                                        <Text style={styles.enrollText02}>{item.endMonth}</Text>
+                                    </View>
+                                    <Text style={styles.enrollText02}>:</Text>
+                                    <View style={styles.enrollCardDateBlock}>
+                                        <Text style={styles.enrollText02}>{item.endYear}</Text>
+                                    </View>
+                                </View>
+                            </View>
+                            <View>
+                                {/* // TODO : when pressing this button it will add the user to the enrolled collection in the competition  */}
+                                {/* // TODO : check Data routing. The user must be linked to the Competition data */}
+                                <TouchableOpacity style={styles.enrollBtn}>
+                                    <Text style={styles.enrollBtnText}>enroll</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    ))
+                ) : (
+                    <Text>no items found</Text>
+                )
+            }
         </View>
     )
 }
@@ -54,10 +86,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    enrollCardTitleCon:{
-        flexDirection:'row',
+    enrollCardTitleCon: {
+        flexDirection: 'row',
         alignItems: 'center',
-        gap:10,
+        gap: 10,
     },
     enrollCardTitle: {
         fontSize: 24,

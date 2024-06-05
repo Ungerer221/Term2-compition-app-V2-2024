@@ -64,7 +64,7 @@ export default function CompListScreen({ navigation }) {
                             )}>
                                 <Text>{item.name}</Text>
                                 {/* // when the item is a priority the star must show - with if statement */}
-                                {item.priority ? <AntDesign name="star" size={24} color="orange" /> : null}
+                                {/* {item.priority ? <AntDesign name="star" size={24} color="orange" /> : null} */}
                             </TouchableOpacity>
                         ))
                     ) : (

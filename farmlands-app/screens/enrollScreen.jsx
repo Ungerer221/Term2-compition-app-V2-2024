@@ -20,22 +20,6 @@ export default function EnrollScreen() {
                 <View>
                     <ScrollView style={styles.enrollCardCon}>
                         <EnrollCardView />
-                        <View style={styles.enrollCard}>
-                            <Text>Enroll</Text>
-                        </View>
-                        <View style={styles.enrollCard}>
-                            <Text>Enroll</Text>
-                        </View>
-                        <View style={styles.enrollCard}>
-                            <Text>Enroll</Text>
-                        </View>
-                        <View style={styles.enrollCard}>
-                            <Text>Enroll</Text>
-                        </View>
-                        <View style={styles.enrollCard}>
-                            <Text>Enroll</Text>
-                        </View>
-
                     </ScrollView>
                 </View>
             </View>

@@ -13,19 +13,53 @@ import LeaderBoardView from '../views/leaderBoardView';
 import StatsBoardView from '../views/statsBoardView';
 import BadgesTab from '../views/badgesTab';
 import LogoutCircle02Icon from '../icons/logout-circle-02-stroke-rounded';
-import { handleLogout } from '../services/authService';
+import { handleLogin, handleLogout } from '../services/authService';
+import { useFocusEffect } from '@react-navigation/native';
+import { getUserData } from '../services/userService';
 
 // TODO : Pass user data through here to profile page and display the data : check the data passing method used in the details pages
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ route, navigation }) {
 
+  const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+
+  const [itemId, setItemId] = useState();
+  const [itemUserName, setItemUserName] = useState();
+  const [itemEmail, setItemEmail] = useState();
+  const [itemPassword, setItemPassword] = useState();
 
   const logout = () => {
     handleLogout(email, password)
     console.log("pressed")
   }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      // handleGettingUserData()
+      // handleLogin()
+
+      // const { itemId, itemUserName, itemEmail, itemPassword } = route.params;
+
+      // setItemId(itemId)
+      // setItemUserName(itemUserName)
+      // setItemEmail(itemEmail)
+      // setItemPassword(itemPassword)
+
+      return () => {
+
+      }
+    })
+  )
+
+  // const handleGettingUserData = async () => {
+  //   var userData = await getUserData()
+  //   setUser(userData)
+  // }
+
+  console.log()
 
   return (
     // could try a view behind the scroll view to add background elements that arent affected by scroll
@@ -38,8 +72,8 @@ export default function ProfileScreen() {
           <View style={styles.profileTopSec}>
             <ProfilePicMain></ProfilePicMain>
             <View style={styles.userDataCon}>
-              <Text style={styles.userDataTitle}>the Users Name</Text>
-              <Text style={styles.userDataBio}>email</Text>
+              <Text style={styles.userDataTitle}>the Users Name{ }</Text>
+              <Text style={styles.userDataBio}>email{email}</Text>
               <Text style={styles.userDataBio}>Person bio</Text>
               <DateJoined></DateJoined>
             </View>
@@ -214,11 +248,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     // color:'#fff'
   },
-  DangerBox:{
-    borderWidth:2,
-    borderRadius:22,
-    padding:10,
-    justifyContent:'center',
-    alignItems:'center',
+  DangerBox: {
+    borderWidth: 2,
+    borderRadius: 22,
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });

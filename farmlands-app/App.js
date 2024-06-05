@@ -36,12 +36,14 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './config/firebase';
 // IMPORT ENDS ----------------------------------------------------------------------------------------------------------------------------
 
-// todo : Make a splash screen and have it working
-// todo : better your react navigation
-// todo : figure out nesting for navigation and then stack navigation
+// * : Make a splash screen and have it working
+// * : better your react navigation
+// * : figure out nesting for navigation and then stack navigation
 // todo : add back buttons 
 // TODO : Add a testing button to add score to the users profile : you can have a collection in a document
 // TODO : find out the rreal problen to the get single item and the sending data trhoug to details page, isn't actually get sigle item 
+
+// TODO : Figure out how to get the enrollment feature working 
 
 // * Tab navigator ------------------------------------------------------------------------------------------------------------------------
 const Tab = createBottomTabNavigator();

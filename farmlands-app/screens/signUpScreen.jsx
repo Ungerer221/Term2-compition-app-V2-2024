@@ -18,13 +18,45 @@ export default function SignUpScreen({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    
+
     const handleUserCreation = async () => {
         var items = { username, email, password }
         var success = await createNewUser(items)
+
+        // Create user document in Firestore
+        // await firebase.firestore().collection('users').doc(userId).set({
+        //     email,
+        //     username,
+        //     // Add any other fields you want to store
+        // });
+        console.log("executed")
     }
-    
+
     const signUp = () => { handleSignup(email, password), handleUserCreation }
+
+    // chatGpt
+    // const handleSignUp = async () => {
+    //     try {
+
+    //         // Create user in Firebase Authentication
+    //           const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+
+    //         // Get the user ID
+    //         const userId = userCredential.user.uid;
+
+    //         // Create user document in Firestore
+    //         await firebase.firestore().collection('users').doc(userId).set({
+    //             email,
+    //             username,
+    //             // Add any other fields you want to store
+    //         });
+
+    //         console.log('User signed up successfully!');
+
+    //     } catch (error) {
+    //         console.error('Error signing up:', error);
+    //     }
+    // };
 
     return (
         <View style={styles.container}>
