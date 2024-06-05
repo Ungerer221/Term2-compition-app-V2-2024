@@ -9,7 +9,7 @@ import PasswordInputField from '../components/passwordInputField';
 import EmailInputField from '../components/emailInputField';
 import UserNameInput from '../components/userNameInput';
 // firebase
-import { createNewUser, handleSignup } from '../services/signupService';
+import { createNewUser, handleSignup } from '../services/authService';
 
 // todo : make the sign up screen part of the drawer navigation for the menu button
 export default function SignUpScreen({ navigation }) {
