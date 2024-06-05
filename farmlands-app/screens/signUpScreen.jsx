@@ -9,19 +9,22 @@ import PasswordInputField from '../components/passwordInputField';
 import EmailInputField from '../components/emailInputField';
 import UserNameInput from '../components/userNameInput';
 // firebase
-import { createNewUser, handleSignup } from '../services/authService';
+import { createNewUser, getloggedinUser, handleSignup } from '../services/authService';
 
 // todo : make the sign up screen part of the drawer navigation for the menu button
 export default function SignUpScreen({ navigation }) {
 
+    // const [uid, setUid] = useState('');
     const [username, setUsername] = useState(''); // uses the onchange value
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
 
     const handleUserCreation = async () => {
-        var items = { username, email, password }
+        var items = {username, email, password }
         var success = await createNewUser(items)
+
+        setUid(getloggedinUser.uid)
 
         // Create user document in Firestore
         // await firebase.firestore().collection('users').doc(userId).set({
@@ -29,10 +32,10 @@ export default function SignUpScreen({ navigation }) {
         //     username,
         //     // Add any other fields you want to store
         // });
-        console.log("executed")
+        // console.log("executed")
     }
 
-    const signUp = () => { handleSignup(email, password), handleUserCreation }
+    const signUp = () => { handleSignup(email, password), handleUserCreation() }
 
     // chatGpt
     // const handleSignUp = async () => {

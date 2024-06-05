@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
 
@@ -67,3 +67,18 @@ export const handleLogout = () => {
     console.log("Executed Function")
 }
 
+export const getloggedinUser = () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        // ...
+        console.log(uid)
+    } else {
+        // User is signed out
+        // ...
+    }
+
+}

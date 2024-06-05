@@ -34,13 +34,13 @@ export default function HomeScreen({ navigation }) {
                 <TopNavBar></TopNavBar>
                 <HelloMeetView />
                 {/* <Text style={styles.homeIntroTitleText}>Welcome</Text> */}
-                <EnrollCompView />
+                {/* <EnrollCompView /> */}
                 <LeaderBoardView></LeaderBoardView>
                 {/* <Text style={styles.heading01}>your total score</Text> */}
                 <View style={styles.home02Con}>
                     {/* <TotalScoreTile></TotalScoreTile> */}
-                    <Text style={styles.heading01}>Badges Earned</Text>
-                    <BadgesTab></BadgesTab>
+                    <Text style={styles.heading01}>Scroll for more</Text>
+                    {/* <BadgesTab></BadgesTab> */}
                     {/* // todo : see if you can make the a touchable */}
                     <View style={styles.gameNavTabCon}>
                         {/* nav button  */}

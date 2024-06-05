@@ -54,23 +54,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     // shadow
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.36,
-    shadowRadius: 6.68,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 5,
+    // },
+    // shadowOpacity: 0.36,
+    // shadowRadius: 6.68,
 
-    elevation: 11,
+    // elevation: 11,
   },
   container02: {
     flex: 0,
     alignItems: 'center',
     justifyContent: 'flex-start',
     // backgroundColor: 'red',
-    borderRadius: 22,
-    padding: 20,
+    // borderRadius: 22,
+    // padding: 20,
     width: 350,
     // height: 284,
     overflow: 'hidden',

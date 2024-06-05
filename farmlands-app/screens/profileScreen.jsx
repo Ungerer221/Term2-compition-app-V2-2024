@@ -13,7 +13,7 @@ import LeaderBoardView from '../views/leaderBoardView';
 import StatsBoardView from '../views/statsBoardView';
 import BadgesTab from '../views/badgesTab';
 import LogoutCircle02Icon from '../icons/logout-circle-02-stroke-rounded';
-import { handleLogin, handleLogout } from '../services/authService';
+import { getloggedinUser, handleLogin, handleLogout } from '../services/authService';
 import { useFocusEffect } from '@react-navigation/native';
 import { getUserData } from '../services/userService';
 
@@ -40,9 +40,9 @@ export default function ProfileScreen({ route, navigation }) {
     React.useCallback(() => {
       // handleGettingUserData()
       // handleLogin()
+      getloggedinUser() // * this get the currentrly logged in user 
 
-      // const { itemId, itemUserName, itemEmail, itemPassword } = route.params;
-
+      // const { itemUserName, itemEmail, itemPassword } = route.params;
       // setItemId(itemId)
       // setItemUserName(itemUserName)
       // setItemEmail(itemEmail)
@@ -59,7 +59,7 @@ export default function ProfileScreen({ route, navigation }) {
   //   setUser(userData)
   // }
 
-  console.log()
+
 
   return (
     // could try a view behind the scroll view to add background elements that arent affected by scroll
@@ -73,7 +73,7 @@ export default function ProfileScreen({ route, navigation }) {
             <ProfilePicMain></ProfilePicMain>
             <View style={styles.userDataCon}>
               <Text style={styles.userDataTitle}>the Users Name{ }</Text>
-              <Text style={styles.userDataBio}>email{email}</Text>
+              <Text style={styles.userDataBio}>email{itemEmail}</Text>
               <Text style={styles.userDataBio}>Person bio</Text>
               <DateJoined></DateJoined>
             </View>
@@ -99,15 +99,15 @@ export default function ProfileScreen({ route, navigation }) {
             <TotalScoreBar />
             <View style={styles.dashBoardCon}>
               <BadgesTab />
-              <Text style={styles.dashBoardSecText}>LeaderBoard</Text>
-              <DividerBar />
-              <LeaderBoardView />
+              {/* <Text style={styles.dashBoardSecText}>LeaderBoard</Text>
+              <DividerBar /> */}
+              {/* <LeaderBoardView /> */}
               <Text style={styles.dashBoardSecText}>Stats</Text>
               <DividerBar />
               <StatsBoardView />
             </View>
             <View style={styles.DangerBox}>
-              <Text style={styles.dashBoardSecTextDanger}>Danger Zone</Text>
+              <Text style={styles.dashBoardSecTextDanger}>! Danger Zone !</Text>
             </View>
             <DividerBar />
             <TouchableOpacity style={styles.LogoutButton} onPress={logout}>
@@ -216,6 +216,7 @@ const styles = StyleSheet.create({
   },
   dasBoardSecContentCon: {
     paddingTop: 20,
+    paddingBottom:20,
     gap: 20,
     width: '100%',
     // flex:0,
@@ -229,7 +230,7 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   dashBoardSecTextDanger: {
-    color: '#f46987',
+    // color: '#f46987',
     fontSize: 32,
     fontWeight: '900',
   },
@@ -249,9 +250,10 @@ const styles = StyleSheet.create({
     // color:'#fff'
   },
   DangerBox: {
-    borderWidth: 2,
+    // borderWidth: 2,
     borderRadius: 22,
     padding: 10,
+    marginTop:20,
     justifyContent: 'center',
     alignItems: 'center',
   }

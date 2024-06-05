@@ -7,7 +7,7 @@ export default function GameNavTab({ navigation,navigate }) {
     return (
         <View>
             <TouchableOpacity>
-                <Text>GameNavTab</Text>
+                {/* <Text>GameNavTab</Text> */}
                 {/* <Button title="Go to Game" onPress={() => navigation.navigate('Game')} /> */}
             </TouchableOpacity>
         </View>

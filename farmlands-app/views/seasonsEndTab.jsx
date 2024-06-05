@@ -47,17 +47,17 @@ const styles = StyleSheet.create({
     width: 350,
     borderRadius: 22,
     backgroundColor: '#fff',
-    padding: 20,
+    // padding: 20,
     // shadow
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.37,
-    shadowRadius: 7.49,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 6,
+    // },
+    // shadowOpacity: 0.37,
+    // shadowRadius: 7.49,
 
-    elevation: 12,
+    // elevation: 12,
   },
   topRow: {
     flex: 0,
