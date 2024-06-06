@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Animated, PanResponder, Modal, Pressable, } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, Animated, PanResponder, Modal, Pressable, TouchableOpacity, } from 'react-native'
 import React, { useState } from 'react';
 // views
 import TopNavBar from '../views/topNavBar';
@@ -7,9 +7,34 @@ import TotalScoreBar from '../views/totalScoreBar';
 import FarmPlantSelectBar from '../views/farmPlantSelectBar';
 import Home05Icon from '../icons/HomeIcon';
 import DashedLine02Icon from '../icons/dashed-line-02-stroke-rounded';
+import { getAllPlantsList } from '../services/plantDbService';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function GameScreen() {
+
     const [modalVisible, setModalVisible] = useState(false);
+
+    const [plantItems, setPlantItems] = useState([]);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            // Do something when the screen is focused
+            handleGettingOfData()
+            return () => {
+                // Do something when the screen is unfocused
+                // Useful for cleanup functions
+                // DO NOTHING
+            };
+        }, [])
+    );
+
+    const handleGettingOfData = async () => {
+        var allData = await getAllPlantsList()
+        // check other consol log in Dbservice above the return
+        // console.log("All Data: " + allData) 
+        setPlantItems(allData) // set bucket items tot alldata
+    }
+
     return (
         <View style={styles.container}>
             <TopNavBar></TopNavBar>
@@ -37,12 +62,24 @@ export default function GameScreen() {
                             <View style={styles.modalView}>
                                 <Text style={styles.modalText}>Please Select a Plant</Text>
                                 <View style={styles.plantcontainer}>
+                                    {
+                                        plantItems != [] ? (
+                                            plantItems.map((item, index) => (
+                                                <TouchableOpacity key={index} style={styles.plantSelect}>
+
+                                                    <Text>{item.name}</Text>
+                                                </TouchableOpacity>
+                                            ))
+                                        ) : (
+                                            <Text>No Items Found</Text>
+                                        )
+                                    }
+                                    {/* <View style={styles.plantSelect}></View> */}
+                                    {/* <View style={styles.plantSelect}></View>
                                     <View style={styles.plantSelect}></View>
                                     <View style={styles.plantSelect}></View>
                                     <View style={styles.plantSelect}></View>
-                                    <View style={styles.plantSelect}></View>
-                                    <View style={styles.plantSelect}></View>
-                                    <View style={styles.plantSelect}></View>
+                                    <View style={styles.plantSelect}></View> */}
                                 </View>
 
                                 {/* close button */}
@@ -215,15 +252,19 @@ const styles = StyleSheet.create({
         // width:280,
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
+        flexDirection: 'column',
         gap: 20,
         padding: 20,
         // backgroundColor: 'red',
+        width: '100%',
     },
     plantSelect: {
-        width: 54,
-        height: 54,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        // width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
         borderColor: 'black',
         borderWidth: 1,
         borderRadius: 15,
@@ -258,9 +299,9 @@ const styles = StyleSheet.create({
     closeBtnText: {
         fontSize: 16,
         fontWeight: '700',
-        color:'#fff',
+        color: '#fff',
     },
-    modalText:{
+    modalText: {
         fontSize: 16,
         fontWeight: '700',
     }
