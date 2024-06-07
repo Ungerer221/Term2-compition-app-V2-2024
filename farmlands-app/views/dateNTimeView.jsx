@@ -1,7 +1,31 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function DateNTimeView() {
+
+
+    const [year, setYear] = useState('');
+    const [month, setMonth] = useState('');
+    const [date, setDate] = useState('');
+
+    const getCurrentDate=()=>{
+ 
+        var date = new Date().getDate();
+        var month = new Date().getMonth() + 1;
+        var year = new Date().getFullYear();
+   
+        //Alert.alert(date + '-' + month + '-' + year);
+        // You can turn it in to your desired format
+        return date + '-' + month + '-' + year;//format: d-m-y;
+  }
+    useEffect(() => {
+        // currentDate()
+        getCurrentDate()
+        setYear(year);
+        setMonth(month);
+        setDate(date);
+    })
+
     return (
         <View style={styles.container}>
             {/* column 1 */}
@@ -11,7 +35,7 @@ export default function DateNTimeView() {
                     <View style={styles.timeBox}>
                         <View style={styles.timeboxC1}>
                             <View style={styles.currentdatebox}>
-                                <Text style={styles.currentdateText}>24</Text>
+                                <Text style={styles.currentdateText}>24{date}</Text>
                             </View>
                         </View>
                         <View style={styles.timeboxC2}>
@@ -62,67 +86,67 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderTopLeftRadius: 12,
         borderBottomLeftRadius: 12,
-        width:190,
+        width: 190,
     },
-    timeCon02:{
-        
+    timeCon02: {
+
     },
     timeBox: {
         backgroundColor: '#fff',
         padding: 10,
-        
+
         borderWidth: 2,
         borderRadius: 12,
         flexDirection: 'row',
         alignItems: 'center',
-        gap:10,
+        gap: 10,
     },
-    timeBox02:{
-        width:'100%',
+    timeBox02: {
+        width: '100%',
         backgroundColor: '#A08BF6',
         padding: 10,
-        paddingHorizontal:20,
+        paddingHorizontal: 20,
         // flexDirection: 'row',
-        justifyContent:'flex-start',
+        justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        gap:5,
-        height:99,
+        gap: 5,
+        height: 99,
         borderTopRightRadius: 12,
         borderBottomRightRadius: 12,
     },
     currentdatebox: {
         padding: 5,
         borderWidth: 2,
-        borderRadius:6,
+        borderRadius: 6,
     },
-    timeboxC1:{
+    timeboxC1: {
 
     },
-    timeboxC2:{
-        gap:20,
+    timeboxC2: {
+        gap: 20,
     },
-    currentdateText:{
-        fontSize:40,
-        fontWeight:'700',
+    currentdateText: {
+        fontSize: 40,
+        fontWeight: '700',
     },
-    currentdateSubText:{
-        fontSize:24,
-        fontWeight:'700',
+    currentdateSubText: {
+        fontSize: 24,
+        fontWeight: '700',
     },
-    nextseasonTitleRow:{
-        justifyContent:'flex-start',
+    nextseasonTitleRow: {
+        justifyContent: 'flex-start',
     },
-    nextSeasonDateCon:{
-        flexDirection:'row',
-        alignItems:'center',
-        gap:10,
+    nextSeasonDateCon: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
     },
-    nextText01:{
-        fontSize:16,
-        fontWeight:'700',
+    nextText01: {
+        fontSize: 16,
+        fontWeight: '700',
     },
-    nextText02:{
-        fontSize:12,
-        fontWeight:'700',
+    nextText02: {
+        fontSize: 12,
+        fontWeight: '700',
     }
 })

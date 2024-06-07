@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
     cirle: {
         // backgroundColor: "#fff",
-        backgroundColor: '#FFD166',
+        backgroundColor: '#fff',
         width: 38,
         height: 38,
         borderRadius: 50,
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         borderStyle: 'dashed',
         width: 350,
         // borderColor: "#fff",
-        borderColor: '#FFD166',
+        borderColor: '#fff',
     },
     leaderBoardTab: {
         width: '100%',

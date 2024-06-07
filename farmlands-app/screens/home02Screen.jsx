@@ -47,6 +47,10 @@ export default function Home02Screen({ navigation }) {
                 <View style={styles.compViewCon}>
                     <CompetitionSectionView />
                 </View>
+                <LeaderBoardView/>
+                <SeasonsEndTab/>
+                <NewsTab/>
+                <AboutUsView/>
             </View>
         </ScrollView>
     )
