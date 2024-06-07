@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, Animated, PanResponder, Modal, Pressable, TouchableOpacity, Alert, } from 'react-native'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // views
 import TopNavBar from '../views/topNavBar';
 import TotalScoreBar from '../views/totalScoreBar';

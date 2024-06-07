@@ -51,10 +51,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     gap: 10,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     // backgroundColor:'#F1B46B',
     width: '100%',
-    padding: 20,
+    // padding: 20,
     borderRadius: 12,
   },
   topRow: {

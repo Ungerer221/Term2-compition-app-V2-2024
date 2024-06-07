@@ -23,6 +23,7 @@ import AdminNavScreen from "../adminNavScreen";
 import CompListScreen from "../compListScreen";
 import CompDetailsScreen from "../compDetailsScreen";
 import CompAddScreen from "../compAddScreen";
+import Home02Screen from "../home02Screen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -127,7 +128,7 @@ export function AdminStack() {
 export function HomeStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Home" component={Home02Screen} />
       <Stack.Screen name="EnrollScreen" component={EnrollScreen} />
       <Stack.Screen name="enroll" component={EnrollCompView} />
     </Stack.Navigator>
