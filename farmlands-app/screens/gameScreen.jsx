@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Animated, PanResponder, Modal, Pressable, TouchableOpacity, } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, Animated, PanResponder, Modal, Pressable, TouchableOpacity, Alert, } from 'react-native'
 import React, { useState } from 'react';
 // views
 import TopNavBar from '../views/topNavBar';
@@ -35,6 +35,55 @@ export default function GameScreen() {
         setPlantItems(allData) // set bucket items tot alldata
     }
 
+    // plant and planting mechanic Idea from chat 
+
+    const [plants, setPlants] = useState([]);
+    const [userScore, setUserScore] = useState(0);
+    const [selectedPlant, setSelectedPlant] = useState(null);
+
+    // ?
+    // The plantData constant is an array of objects representing different types of plants that can be planted in the app. Each object in the array represents a plant and contains three properties:
+
+    // name: This property stores the name or identifier of the plant.
+    // growthTime: This property represents the time it takes for the plant to grow and become ready for harvest, measured in seconds.
+    // scoreAmount: This property indicates the score amount that the user will receive when they harvest this particular plant.
+    const plantData = [
+        { name: 'Plant A', growthTime: 3600, scoreAmount: 10 }, // Growth time in seconds
+        // Add more plant data as needed
+    ];
+
+    // ?
+    const plant = (plantName) => {
+        const timestamp = Date.now();
+        setPlants([...plantItems, { name: plantName, timestamp }]);
+    };
+
+    // ?
+    useEffect(() => {
+        // Calculate growth and update plant status
+        plants.forEach((plant) => {
+            const timePassed = (Date.now() - plant.timestamp) / 1000; // Convert to seconds
+            if (timePassed >= plantData.find((p) => p.name === plant.name).growthTime) {
+                // Plant is ready for harvest
+                // You can mark it as such or display a visual indicator
+            }
+        });
+    }, [plants]);
+
+
+    // ?
+    const harvest = (plantName) => {
+        const plant = plants.find((p) => p.name === plantName);
+        const plantDataEntry = plantData.find((p) => p.name === plantName);
+        const timePassed = (Date.now() - plant.timestamp) / 1000; // Convert to seconds
+        if (timePassed >= plantDataEntry.growthTime) {
+            // Add score amount to user's total score
+            setUserScore(userScore + plantDataEntry.scoreAmount);
+            // Remove plant from planted plants
+            setPlants(plants.filter((p) => p.name !== plantName));
+        }
+    };
+
     return (
         <View style={styles.container}>
             <TopNavBar></TopNavBar>
@@ -49,6 +98,7 @@ export default function GameScreen() {
                 {/* the plant plot */}
                 {/* // todo : Make the modal a component that imports the Plants to plant */}
                 {/* // todo : could have the modal out side and inport it into the plot as the modal will contain the same information and then select what plant to plant in that spot */}
+                {/* when the plant is ready you must be able to press and collect the harvested plant withough it activating the modal */}
                 <View style={styles.farmPlantPlot}>
                     <Modal
                         animationType="slide"
@@ -62,29 +112,26 @@ export default function GameScreen() {
                             <View style={styles.modalView}>
                                 <Text style={styles.modalText}>Please Select a Plant</Text>
                                 <View style={styles.plantcontainer}>
-                                    {
-                                        plantItems != [] ? (
-                                            plantItems.map((item, index) => (
-                                                <TouchableOpacity key={index} style={styles.plantSelect}>
+                                    <ScrollView>
+                                        {
+                                            plantItems != [] ? (
+                                                plantItems.map((item, index) => (
+                                                    // when we press on the touchable below we waant it to plant the plant on the plot.
+                                                    <TouchableOpacity key={index} style={styles.plantSelect} onPress={()=> harvest(plant.name)}> 
 
-                                                    <Text>{item.name}</Text>
-                                                </TouchableOpacity>
-                                            ))
-                                        ) : (
-                                            <Text>No Items Found</Text>
-                                        )
-                                    }
-                                    {/* <View style={styles.plantSelect}></View> */}
-                                    {/* <View style={styles.plantSelect}></View>
-                                    <View style={styles.plantSelect}></View>
-                                    <View style={styles.plantSelect}></View>
-                                    <View style={styles.plantSelect}></View>
-                                    <View style={styles.plantSelect}></View> */}
+                                                        <Text>{item.name}</Text>
+                                                    </TouchableOpacity>
+                                                ))
+                                            ) : (
+                                                <Text>No Items Found</Text>
+                                            )
+                                        }
+                                    </ScrollView>
                                 </View>
 
                                 {/* close button */}
                                 <Pressable
-                                    style={[styles.button, styles.buttonClose]}
+                                    style={[styles.closeButton, styles.buttonClose]}
                                     onPress={() => setModalVisible(!modalVisible)}>
                                     <Text style={styles.closeBtnText}>Hide Modal</Text>
                                 </Pressable>
@@ -250,24 +297,27 @@ const styles = StyleSheet.create({
     plantcontainer: {
         // width: '100%',
         // width:280,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         flexDirection: 'column',
         gap: 20,
-        padding: 20,
+        // padding: 20,
         // backgroundColor: 'red',
         width: '100%',
     },
     plantSelect: {
         paddingHorizontal: 20,
         paddingVertical: 10,
-        // width: '100%',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         flexDirection: 'row',
         borderColor: 'black',
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 15,
+        width: 250,
+        marginTop: 10,
+        // backgroundColor: 'red',
+
     },
     centeredView: {
         flex: 1,
@@ -304,5 +354,11 @@ const styles = StyleSheet.create({
     modalText: {
         fontSize: 16,
         fontWeight: '700',
+    },
+    button: {
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });

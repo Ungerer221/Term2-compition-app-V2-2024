@@ -1,6 +1,6 @@
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, db } from "../config/firebase";
-import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 
 export const handleLogin = (email, password) => {
@@ -47,6 +47,7 @@ export const createNewUser = async (item) => {
     }
 }
 
+
 // TODO : Logout Function
 export const handleLogout = () => {
     const auth = getAuth();
@@ -57,15 +58,9 @@ export const handleLogout = () => {
         // An error happened.
         console.error('Error signing out:', error);
     });
-    // try {
-    //     await signOut(auth);
-    //     console.log('User signed out successfully');
-    //     // You can navigate to another screen or update the state as needed after logout
-    // } catch (error) {
-    //     console.error('Error signing out:', error);
-    // }
     console.log("Executed Function")
 }
+
 
 export const getloggedinUser = () => {
     const auth = getAuth();
@@ -80,5 +75,4 @@ export const getloggedinUser = () => {
         // User is signed out
         // ...
     }
-
 }
