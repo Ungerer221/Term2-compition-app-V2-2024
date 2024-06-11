@@ -42,18 +42,18 @@ export const getAllPlantsList = async () => {
 // 1. get id of the item you pressed
 // 2. have that item id = var
 // 3. have the var being called in the getDoc
-export const getPlantItem = async (itemID) => {
-    // const id = query(collection(db,"items"))
+// export const getPlantItem = async (itemID) => {
+//     // const id = query(collection(db,"items"))
 
-    const docRef = doc(db, "plants", itemID);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-    } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-    }
-}
+//     const docRef = doc(db, "plants", itemID);
+//     const docSnap = await getDoc(docRef);
+//     if (docSnap.exists()) {
+//         console.log("Document data:", docSnap.data());
+//     } else {
+//         // docSnap.data() will be undefined in this case
+//         console.log("No such document!");
+//     }
+// }
 
 // TODO : Update Functionality
 export const updatePlantItem = async (itemID) => {

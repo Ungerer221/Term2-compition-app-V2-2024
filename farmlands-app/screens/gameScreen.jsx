@@ -12,6 +12,8 @@ import { useFocusEffect } from '@react-navigation/native';
 
 export default function GameScreen() {
 
+    // TODO: Must add a score button to test score for game
+
     const [modalVisible, setModalVisible] = useState(false);
 
     const [plantItems, setPlantItems] = useState([]);

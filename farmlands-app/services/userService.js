@@ -2,6 +2,22 @@ import { collection, addDoc, getDocs, query, orderBy, Firestore, } from "firebas
 import { db } from "../config/firebase";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 
+// Create user is in auth
+
+// TODO : Get All users
+export const getAllUsersList = async () => {
+    var allUsers = []
+
+    var q = query(collection(db,"users"))
+    const querySnapShot = await getDocs(q);
+
+    querySnapShot.forEach((doc) => {
+        allUsers.push({ ...doc.data(), id: doc.id })
+    })
+    // console.log(allUsers)
+    return allUsers
+}
+
 // TODO : get single user
 export const getUserData = async (users, id) => {
     try {

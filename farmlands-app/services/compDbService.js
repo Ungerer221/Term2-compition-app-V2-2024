@@ -1,7 +1,9 @@
 import { collection, addDoc, getDocs, query, orderBy, Firestore, } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
-// TODO : Create Doc
+
+
+// * : Create Doc
 export const createNewCompItem = async (item) => {
     try {
 
@@ -17,7 +19,7 @@ export const createNewCompItem = async (item) => {
 }
 
 
-// TODO : get all docs
+// * : get all docs
 export const getAllCompsList = async () => {
     var allComps = []
 
@@ -27,7 +29,8 @@ export const getAllCompsList = async () => {
     querySnapShot.forEach((doc) => {
         allComps.push({ ...doc.data(), id: doc.id })
     })
-    // console.log(allComps)
+    // why does is keep calling data
+    // console.log(allComps) 
     return allComps
 }
 

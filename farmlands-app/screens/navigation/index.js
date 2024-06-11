@@ -24,6 +24,7 @@ import CompListScreen from "../compListScreen";
 import CompDetailsScreen from "../compDetailsScreen";
 import CompAddScreen from "../compAddScreen";
 import Home02Screen from "../home02Screen";
+import UserListScreen from "../userListScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -121,6 +122,7 @@ export function AdminStack() {
       <Stack.Screen name="CompList" component={CompListScreen} />
       <Stack.Screen name="CompDetail" component={CompDetailsScreen} />
       <Stack.Screen name="CompAdd" component={CompAddScreen} />
+      <Stack.Screen name="UserList" component={UserListScreen} />
     </Stack.Navigator>
   )
 }

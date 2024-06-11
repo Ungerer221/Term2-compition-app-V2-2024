@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native'
 // import React from 'react'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // views
 import TopNavBar from '../views/topNavBar';
 
@@ -21,10 +21,12 @@ export default function SignUpScreen({ navigation }) {
 
 
     const handleUserCreation = async () => {
-        var items = {username, email, password }
-        var success = await createNewUser(items)
+        // var uid = await getloggedinUser()
+        var items = { username, email, password,}
+        // var success = await createNewUser(items)
+        var success = handleSignup(email,password,items)
 
-        setUid(getloggedinUser.uid)
+        // setUid(getloggedinUser.uid)
 
         // Create user document in Firestore
         // await firebase.firestore().collection('users').doc(userId).set({
@@ -34,8 +36,13 @@ export default function SignUpScreen({ navigation }) {
         // });
         // console.log("executed")
     }
+    // const getloggedinUser = ()=>{
+    //    useEffect(()=>{
+    //     firebase
+    //    })
+    // }
 
-    const signUp = () => { handleSignup(email, password), handleUserCreation() }
+    const signUp = () => { handleUserCreation() }
 
     // chatGpt
     // const handleSignUp = async () => {

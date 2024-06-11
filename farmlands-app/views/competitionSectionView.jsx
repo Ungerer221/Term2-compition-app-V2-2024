@@ -4,6 +4,10 @@ import HandPrayerIcon from '../icons/hand-prayer-stroke-rounded'
 import { useNavigation } from '@react-navigation/native'
 
 export default function CompetitionSectionView() {
+    // TODO: 1. when the user enrolls in a competition they will be added to the enrolled collection inside the comepetition
+    // TODO: 2. whoever is in the enrolled collection With user UID will be counted as enrolled in that competition 
+    // TODO: 3. when that person is enrolled the button will change color and the will be an icon to show that the user is enrolled
+    // TODO: 4. the user must be able to opt out of the competition
 
     const navigation = useNavigation();
 

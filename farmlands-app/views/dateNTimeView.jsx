@@ -4,27 +4,27 @@ import React, { useEffect, useState } from 'react'
 export default function DateNTimeView() {
 
 
-    const [year, setYear] = useState('');
-    const [month, setMonth] = useState('');
-    const [date, setDate] = useState('');
+//     const [year, setYear] = useState('');
+//     const [month, setMonth] = useState('');
+//     const [date, setDate] = useState('');
 
-    const getCurrentDate=()=>{
+//     const getCurrentDate=()=>{
  
-        var date = new Date().getDate();
-        var month = new Date().getMonth() + 1;
-        var year = new Date().getFullYear();
+//         var date = new Date().getDate();
+//         var month = new Date().getMonth() + 1;
+//         var year = new Date().getFullYear();
    
-        //Alert.alert(date + '-' + month + '-' + year);
-        // You can turn it in to your desired format
-        return date + '-' + month + '-' + year;//format: d-m-y;
-  }
-    useEffect(() => {
-        // currentDate()
-        getCurrentDate()
-        setYear(year);
-        setMonth(month);
-        setDate(date);
-    })
+//         //Alert.alert(date + '-' + month + '-' + year);
+//         // You can turn it in to your desired format
+//         return date + '-' + month + '-' + year;//format: d-m-y;
+//   }
+//     useEffect(() => {
+//         // currentDate()
+//         getCurrentDate()
+//         setYear(year);
+//         setMonth(month);
+//         setDate(date);
+//     })
 
     return (
         <View style={styles.container}>
@@ -35,7 +35,7 @@ export default function DateNTimeView() {
                     <View style={styles.timeBox}>
                         <View style={styles.timeboxC1}>
                             <View style={styles.currentdatebox}>
-                                <Text style={styles.currentdateText}>24{date}</Text>
+                                <Text style={styles.currentdateText}>24</Text>
                             </View>
                         </View>
                         <View style={styles.timeboxC2}>
