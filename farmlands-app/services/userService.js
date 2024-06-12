@@ -1,5 +1,5 @@
 import { collection, addDoc, getDocs, query, orderBy, Firestore, } from "firebase/firestore";
-import { db } from "../config/firebase";
+import { auth, db } from "../config/firebase";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
@@ -9,7 +9,7 @@ import { getAuth } from "firebase/auth";
 export const getAllUsersList = async () => {
     var allUsers = []
 
-    var q = query(collection(db, "users"),orderBy("score", "desc"))
+    var q = query(collection(db, "users"), orderBy("score", "desc"))
     const querySnapShot = await getDocs(q);
 
     querySnapShot.forEach((doc) => {
@@ -19,15 +19,17 @@ export const getAllUsersList = async () => {
     // console.log(allUsers)
     return allUsers
 }
+
 // TODO : get single user
-export const getUserItem = async (users, id) => {
+export const getUserItem = async (userId,id) => {
     // const auth = getAuth();
     // const user = auth.currentUser;
     try {
-        const docRef = doc(db, "users", "WjYXoE9eiEWzAmqV1HclpQ2wfZp2");
+        const docRef = doc(db, "users", "wRQiXy0pHGhL1LOl2F5fVmnHrXu1");
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
+            // ? this loops infinitly 
             // console.log("Document data:", docSnap.data());
             return docSnap.data(); // Directly return the document data
         } else {
@@ -39,25 +41,22 @@ export const getUserItem = async (users, id) => {
         throw error; // Optionally rethrow the error to handle it elsewhere
     }
 };
-// export const getUserItem = async (id) => {
-//     // TODO : 1. get the Item of currently logged in user using the user id or uid
-//     // TODO : 2. Call the data to the profile screen 
-//     // TODO : 3. display the data
-//     try {
-//         const docRef = doc(db, "users", "WjYXoE9eiEWzAmqV1HclpQ2wfZp2");
-//         const docSnap = await getDoc(docRef);
 
-//         if (docSnap.exists()) {
-//             // ? this loops infinitly 
-//             // console.log("Document data:", docSnap.data());
-//             return docSnap.data(); // Directly return the document data
-//         } else {
-//             // docSnap.data() will be undefined in this case
-//             console.log("No such document!");
-//             return null; // Return null if the document does not exist
-//         }
-//     } catch (error) {
-//         console.error("Error getting UserItem: ", error);
-//         //         throw error; // Optionally rethrow the error to handle it elsewhere
-//     }
-// }
+
+
+// * To Get the currently Logged in User
+export const getloggedinUser = async () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        // ...
+        console.log(uid)
+        return uid // if you wan to return data froma function
+    } else {
+        // User is signed out
+        // ...
+    }
+}

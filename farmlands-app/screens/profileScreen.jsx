@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { auth, getAuth } from "../config/firebase";
 // views
 import TopNavBar from '../views/topNavBar';
@@ -15,7 +15,7 @@ import BadgesTab from '../views/badgesTab';
 import LogoutCircle02Icon from '../icons/logout-circle-02-stroke-rounded';
 import { getloggedinUser, handleLogin, handleLogout } from '../services/authService';
 import { useFocusEffect } from '@react-navigation/native';
-import { getUserData, getUserItem } from '../services/userService';
+import { fetchUserData, getUserData, getUserItem } from '../services/userService';
 
 // TODO : Pass user data through here to profile page and display the data : check the data passing method used in the details pages
 
@@ -23,6 +23,7 @@ export default function ProfileScreen({ route, navigation }) {
 
   const [user, setUser] = useState([]);
 
+  const [currentUser, setCurrentUser] = useState(null);
   
 
   const [username, setUsername] = useState('');
@@ -44,9 +45,9 @@ export default function ProfileScreen({ route, navigation }) {
   useFocusEffect(
     React.useCallback(() => {
       handleGettingUserData()
-      // getloggedinUser() // * this get the currentrly logged in user 
+      
+      getloggedinUser() // * this get the currentrly logged in user 
       return () => {
-
       }
     },[])
   )
@@ -56,7 +57,10 @@ export default function ProfileScreen({ route, navigation }) {
     setUser(userData)
   }
 
-
+  useEffect(() => {
+    // getUserData()
+    // fetchUserData()
+  }, []);
 
   return (
     // could try a view behind the scroll view to add background elements that arent affected by scroll

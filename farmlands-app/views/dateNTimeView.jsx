@@ -35,10 +35,10 @@ export default function DateNTimeView() {
                         </View>
                         <View style={styles.timeboxC2}>
                             <View>
-                                <Text style={styles.currentdateSubText}>{currentMonth}</Text>
+                                <Text style={styles.currentdateSubText}>M: {currentMonth}</Text>
                             </View>
                             <View>
-                                <Text style={styles.currentdateSubText}>{currentYear}</Text>
+                                <Text style={styles.currentdateSubText}>Y: {currentYear}</Text>
                             </View>
                         </View>
                     </View>
