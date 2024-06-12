@@ -1,6 +1,6 @@
 import { collection, addDoc, getDocs, query, orderBy, Firestore, } from "firebase/firestore";
 import { db } from "../config/firebase";
-import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, deleteDoc, } from "firebase/firestore";
 
 
 // * : Create Doc
@@ -18,6 +18,27 @@ export const createNewCompItem = async (item) => {
     }
 }
 
+// TODO: create a user doc in the competition list
+export const addUserToComp = async (compId, enrolledData) => {
+    try {
+        // 1. specify where we want the data to be added
+        const compRef = doc(db, "competitions", compId) // target a specific document see (dayId)
+
+        // 2. specifiy sub collection in this document where we want to add doc
+        const enrolledRef = collection(compRef, "enrolled")
+
+        // 3. add doc into this subcollection
+        const docRef = await addDoc(enrolledRef, enrolledData)
+
+        console.log("success adding doc id: " + docRef.id)
+        return true // success
+
+    } catch (e) {
+        console.log("something went wong" + e)
+        return false // failed
+    }
+}
+
 
 // * : get all docs
 export const getAllCompsList = async () => {
@@ -32,6 +53,19 @@ export const getAllCompsList = async () => {
     // why does is keep calling data
     // console.log(allComps) 
     return allComps
+}
+
+// TODO: get all items in the subCollection
+export const getAllSubCompItems = async (id) => {
+    var allSubCompItems = []
+
+    // Query a reference to a subcollection
+    const querySnapshot = await getDocs(collection(db, "competitions", "enrolled",id));
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+    });
+    return allSubCompItems
 }
 
 // TODO : Get single item 

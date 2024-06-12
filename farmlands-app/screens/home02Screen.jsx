@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         // backgroundColor:'red',
     },
     homeWelcomeText: {
-        fontSize: 46,
+        fontSize: 52, // was 46
         fontWeight: '900',
     },
     welcomSubText: {

@@ -23,15 +23,17 @@ export default function ProfileScreen({ route, navigation }) {
 
   const [user, setUser] = useState([]);
 
+  
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
 
-  const [itemId, setItemId] = useState();
-  const [itemUsername, setItemUsername] = useState();
-  const [itemEmail, setItemEmail] = useState();
-  const [itemPassword, setItemPassword] = useState();
+  // const [itemId, setItemId] = useState();
+  // const [itemUsername, setItemUsername] = useState();
+  // const [itemEmail, setItemEmail] = useState();
+  // const [itemPassword, setItemPassword] = useState();
 
 
   const logout = () => {
@@ -41,12 +43,12 @@ export default function ProfileScreen({ route, navigation }) {
 
   useFocusEffect(
     React.useCallback(() => {
-      handleGettingUserData();
-      getloggedinUser() // * this get the currentrly logged in user 
+      handleGettingUserData()
+      // getloggedinUser() // * this get the currentrly logged in user 
       return () => {
 
       }
-    })
+    },[])
   )
 
   const handleGettingUserData = async () => {

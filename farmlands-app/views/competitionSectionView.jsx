@@ -1,7 +1,8 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import HandPrayerIcon from '../icons/hand-prayer-stroke-rounded'
-import { useNavigation } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { getAllUsersList } from '../services/userService';
 
 export default function CompetitionSectionView() {
     // TODO: 1. when the user enrolls in a competition they will be added to the enrolled collection inside the comepetition
@@ -11,12 +12,43 @@ export default function CompetitionSectionView() {
 
     const navigation = useNavigation();
 
+    // getting all users 
+    const [users, setUsers] = useState([]);
+    const [totalUsers, setTotalUsers] = useState('');
+
+    useFocusEffect(
+        React.useCallback(() => {
+            handleGettingUserData()
+            return () => {
+                // Do something when the screen is unfocused
+                // Useful for cleanup functions
+                // DO NOTHING
+            }
+        },[])
+    )
+
+    // ? is this slowing down my app
+    // useEffect(() => {
+    //     handleGettingUserData()
+    // }, []);
+
+
+    const handleGettingUserData = async () => {
+        var allUserData = await getAllUsersList()
+        setUsers(allUserData)
+        // console.log("hello")
+
+        var numberOfUsers = allUserData.length
+        setTotalUsers(numberOfUsers)
+        console.log(numberOfUsers)
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.compInfoCon}>
                 <View style={styles.compInfoTitleBox}>
                     <View style={styles.compInfoTitleBoxRow01}>
-                        <Text style={styles.fontHeading02}>View the Competitions :0</Text>
+                        <Text style={styles.fontHeading02}>View the Competitions:</Text>
                         <HandPrayerIcon />
                     </View>
                     <Text>Enroll in challenges and competitions to earn points and climb to the top</Text>
@@ -27,7 +59,7 @@ export default function CompetitionSectionView() {
                         <Text style={styles.fontbody01}>The current number of players Currently enrolled in the competitions</Text>
                     </View>
                     <View style={styles.numberOfCompBox}>
-                        <Text>200</Text>
+                        <Text>{totalUsers}</Text>
                     </View>
                 </View>
             </View>
@@ -42,7 +74,7 @@ export default function CompetitionSectionView() {
                     <Text style={styles.enrollViewButtonText}>View</Text>
                 </TouchableOpacity>
             </View>
-            
+
         </View>
     )
 }
@@ -56,8 +88,8 @@ const styles = StyleSheet.create({
         borderRadius: 22,
         padding: 5,
         gap: 10,
-        backgroundColor:'#fff',
-        overflow:'hidden',
+        backgroundColor: '#fff',
+        overflow: 'hidden',
     },
     compInfoCon: {
         width: '100%',
@@ -136,15 +168,15 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         borderBottomRightRadius: 22,
     },
-    enrollViewButtonText:{
-        fontSize:16,
-        fontWeight:'700',
+    enrollViewButtonText: {
+        fontSize: 16,
+        fontWeight: '700',
     },
     pavIllustration: {
-        width:150,
+        width: 150,
         position: 'absolute',
         left: -160,
-        bottom:-103,
-        zIndex:-10,
+        bottom: -103,
+        zIndex: -10,
     },
 })

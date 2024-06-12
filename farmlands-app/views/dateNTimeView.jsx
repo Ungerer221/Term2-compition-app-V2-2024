@@ -3,28 +3,23 @@ import React, { useEffect, useState } from 'react'
 
 export default function DateNTimeView() {
 
+    const [currentDate, setCurrentDate] = useState('');
+    const [currentDay,setCurrentDay]= useState('');
+    const [currentMonth,setCurrentMonth]= useState('');
+    const [currentYear,setCurrentYear]= useState('');
 
-//     const [year, setYear] = useState('');
-//     const [month, setMonth] = useState('');
-//     const [date, setDate] = useState('');
+    useEffect(() => {
+        var date = new Date().getDate(); //Current date
+        var month = new Date().getMonth() + 1; // current month
+        var year = new Date().getFullYear(); // current Month
 
-//     const getCurrentDate=()=>{
- 
-//         var date = new Date().getDate();
-//         var month = new Date().getMonth() + 1;
-//         var year = new Date().getFullYear();
-   
-//         //Alert.alert(date + '-' + month + '-' + year);
-//         // You can turn it in to your desired format
-//         return date + '-' + month + '-' + year;//format: d-m-y;
-//   }
-//     useEffect(() => {
-//         // currentDate()
-//         getCurrentDate()
-//         setYear(year);
-//         setMonth(month);
-//         setDate(date);
-//     })
+        setCurrentDate(
+            date + '/' + month + '/' + year
+        );
+        setCurrentDay(date)
+        setCurrentMonth(month)
+        setCurrentYear(year)
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -35,15 +30,15 @@ export default function DateNTimeView() {
                     <View style={styles.timeBox}>
                         <View style={styles.timeboxC1}>
                             <View style={styles.currentdatebox}>
-                                <Text style={styles.currentdateText}>24</Text>
+                                <Text style={styles.currentdateText}>{currentDay}</Text>
                             </View>
                         </View>
                         <View style={styles.timeboxC2}>
                             <View>
-                                <Text style={styles.currentdateSubText}>06</Text>
+                                <Text style={styles.currentdateSubText}>{currentMonth}</Text>
                             </View>
                             <View>
-                                <Text style={styles.currentdateSubText}>2024</Text>
+                                <Text style={styles.currentdateSubText}>{currentYear}</Text>
                             </View>
                         </View>
                     </View>

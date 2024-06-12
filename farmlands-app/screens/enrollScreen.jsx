@@ -5,6 +5,9 @@ import EnrollCardView from '../views/enrollCardView';
 
 
 export default function EnrollScreen() {
+
+    
+
     return (
         <View style={styles.container}>
             <View style={styles.container02}>
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         borderWidth: 2,
         borderColor: 'black',
-        borderRadius: 22,
+        borderRadius: 12,
     },
     enrollCard: {
         // height:50,

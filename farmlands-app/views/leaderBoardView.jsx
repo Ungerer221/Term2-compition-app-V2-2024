@@ -29,13 +29,15 @@ export default function LeaderBoardView() {
                 // Useful for cleanup functions
                 // DO NOTHING
             }
-        })
+        },[])
     )
 
     const handleGettingUserData = async () => {
         var allUserData = await getAllUsersList()
         setUsers(allUserData)
-        // console.log("hello")
+        // console.log(allUserData) // working
+        var numberOfUsers = allUserData.length
+        // console.log(numberOfUsers)
     }
 
     return (
@@ -67,7 +69,7 @@ export default function LeaderBoardView() {
                                             <Feather name="user" size={24} color="black" />
                                             <Text style={styles.userDateText}>{item.username}</Text>
                                         </View>
-                                        <Text>${item.score}</Text>
+                                        <Text>${item.score}.00</Text>
                                         <Text>h{users.date}</Text>
                                     </View>
                                 ))
@@ -75,8 +77,6 @@ export default function LeaderBoardView() {
                                 <Text>no items found</Text>
                             )
                         }
-
-
                     </View>
                 </View>
             </View>
@@ -177,10 +177,12 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     userDate: {
+        width:140,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         gap: 5,
+        // backgroundColor:'blue'
     },
     userDateText: {
         fontSize: 16,

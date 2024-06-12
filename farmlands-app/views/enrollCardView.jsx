@@ -2,18 +2,20 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import Sun01Icon from '../icons/sun-01-stroke-rounded'
 import { useFocusEffect } from '@react-navigation/native'
-import { getAllCompsList } from '../services/compDbService'
+import { addUserToComp, getAllCompsList, getAllSubCompItems } from '../services/compDbService'
 
 export default function EnrollCardView() {
 
     const [compItems, setCompItems] = useState([])
+    const [subEnrolledItems, setSubEnrolledItems] = useState([])
+
+    const [username, setUsername] = useState('');
 
     useFocusEffect(
         React.useCallback(() => {
             handleGettingOfCompData()
+            // handleGettingSubEnrolledData()
             return () => {
-                // Do something when the screen is unfocused
-                // Useful for cleanup functions
                 // DO NOTHING
             }
         })
@@ -23,6 +25,20 @@ export default function EnrollCardView() {
         var allCompData = await getAllCompsList()
         setCompItems(allCompData)
     }
+
+    // getting all subcollection data
+    const handleGettingSubEnrolledData = async () => {
+        var allEnrolledData = await getAllSubCompItems()
+        setSubEnrolledItems(allEnrolledData)
+    }
+
+    // TODO: to add the user to the enrolled subCollection similar to adding the user from auth
+    const handleSettingEnrollment = async () => {
+        // var enrollUserData = { username,}
+        addUserToComp()
+    }
+    const enrollUser = () => { handleSettingEnrollment() }
+
 
     return (
         <View style={styles.cardCon}>
@@ -34,7 +50,8 @@ export default function EnrollCardView() {
                             <View style={styles.enrollCardTitleRow}>
                                 <View style={styles.enrollCardTitleCon}>
                                     <Text style={styles.enrollCardTitle}>{item.name}</Text>
-                                    <Text style={styles.enrollText03}>(1/7)</Text>
+                                    {/* will be the number of enrolled indeviduals  */}
+                                    <Text style={styles.enrollText03}>(0)</Text>
                                 </View>
                                 <Sun01Icon />
                             </View>
@@ -58,7 +75,7 @@ export default function EnrollCardView() {
                             <View>
                                 {/* // TODO : when pressing this button it will add the user to the enrolled collection in the competition  */}
                                 {/* // TODO : check Data routing. The user must be linked to the Competition data */}
-                                <TouchableOpacity style={styles.enrollBtn}>
+                                <TouchableOpacity style={styles.enrollBtn} onPress={enrollUser}>
                                     <Text style={styles.enrollBtnText}>enroll</Text>
                                 </TouchableOpacity>
                             </View>
@@ -131,5 +148,5 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: '#fff',
         textTransform: 'capitalize',
-    }
+    },
 })
