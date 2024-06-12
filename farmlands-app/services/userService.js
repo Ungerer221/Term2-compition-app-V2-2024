@@ -21,12 +21,12 @@ export const getAllUsersList = async () => {
 }
 
 // TODO : get single user
-export const getUserItem = async (userId,id) => {
+export const getUserItem = async (user,id) => {
     // const auth = getAuth();
     // const user = auth.currentUser;
     try {
         const docRef = doc(db, "users", "wRQiXy0pHGhL1LOl2F5fVmnHrXu1");
-        const docSnap = await getDoc(docRef);
+        const docSnap = await getDoc((docRef),user);
 
         if (docSnap.exists()) {
             // ? this loops infinitly 
