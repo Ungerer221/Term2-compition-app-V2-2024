@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 10,
         gap: 20,
-        borderWidth: 2,
+        // borderWidth: 2,
         borderRadius: 18,
         backgroundColor: '#fff',
         // backgroundColor: 'red',

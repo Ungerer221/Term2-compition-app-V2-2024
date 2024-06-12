@@ -18,13 +18,15 @@ export default function SignUpScreen({ navigation }) {
     const [username, setUsername] = useState(''); // uses the onchange value
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [score, setScore] = useState('');
+    const [date, setDate] = useState(new Date());
 
 
     const handleUserCreation = async () => {
         // var uid = await getloggedinUser()
-        var items = { username, email, password,}
+        var items = { username, email, password, score, date }
         // var success = await createNewUser(items)
-        var success = handleSignup(email,password,items)
+        var success = handleSignup(email, password, items)
 
         // setUid(getloggedinUser.uid)
 

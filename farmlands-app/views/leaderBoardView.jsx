@@ -1,12 +1,15 @@
-import { View, Text, StyleSheet,ScrollView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 // import React from 'react'
 import React, { useState } from 'react';
 // views
 import TotalScoreTile from './totalScoreTile';
 // icons
 import { AntDesign } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 // components
 import LeaderBoardDataRow from '../components/leaderBoardDataRow';
+import { useFocusEffect } from '@react-navigation/native';
+import { getAllUsersList } from '../services/userService';
 
 export default function LeaderBoardView() {
 
@@ -14,6 +17,26 @@ export default function LeaderBoardView() {
     const [shadowOffsetHeight, setShadowOffsetHeight] = useState(0);
     const [shadowRadius, setShadowRadius] = useState(0);
     const [shadowOpacity, setShadowOpacity] = useState(0.1);
+
+    // getting all users 
+    const [users, setUsers] = useState([]);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            handleGettingUserData()
+            return () => {
+                // Do something when the screen is unfocused
+                // Useful for cleanup functions
+                // DO NOTHING
+            }
+        })
+    )
+
+    const handleGettingUserData = async () => {
+        var allUserData = await getAllUsersList()
+        setUsers(allUserData)
+        // console.log("hello")
+    }
 
     return (
         <View>
@@ -35,10 +58,25 @@ export default function LeaderBoardView() {
                         </View>
                     </View>
                     <View style={styles.leaderBoardUserView}>
-                        <LeaderBoardDataRow />
-                        <LeaderBoardDataRow />
-                        <LeaderBoardDataRow />
-                        <LeaderBoardDataRow />
+                        {/* maybe use a flat list here */}
+                        {
+                            users != [] ? (
+                                users.map((item, index) => (
+                                    <View style={styles.containerDataRow} key={index}>
+                                        <View style={styles.userDate}>
+                                            <Feather name="user" size={24} color="black" />
+                                            <Text style={styles.userDateText}>{item.username}</Text>
+                                        </View>
+                                        <Text>${item.score}</Text>
+                                        <Text>h{users.date}</Text>
+                                    </View>
+                                ))
+                            ) : (
+                                <Text>no items found</Text>
+                            )
+                        }
+
+
                     </View>
                 </View>
             </View>
@@ -49,7 +87,7 @@ export default function LeaderBoardView() {
 const styles = StyleSheet.create({
     container: {
         // width: '100%',
-        margin:'auto',
+        margin: 'auto',
         width: 370,
         // height: 370,
         backgroundColor: 'red',
@@ -123,11 +161,29 @@ const styles = StyleSheet.create({
     leaderBoardUserView: {
         backgroundColor: '#CA3458',
         width: '95%',
-        height: 140,
+        maxHeight: 540,
         borderTopRightRadius: 22,
         borderBottomRightRadius: 22,
         padding: 20,
-        gap:10,
-        overflow:'hidden',
-    }
+        gap: 20,
+        overflow: 'hidden',
+    },
+    containerDataRow: {
+        flex: 0,
+        //   backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        width: '100%',
+    },
+    userDate: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 5,
+    },
+    userDateText: {
+        fontSize: 16,
+        fontWeight: '700',
+    },
 });

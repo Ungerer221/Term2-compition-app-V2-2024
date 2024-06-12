@@ -15,21 +15,24 @@ import BadgesTab from '../views/badgesTab';
 import LogoutCircle02Icon from '../icons/logout-circle-02-stroke-rounded';
 import { getloggedinUser, handleLogin, handleLogout } from '../services/authService';
 import { useFocusEffect } from '@react-navigation/native';
-import { getUserData } from '../services/userService';
+import { getUserData, getUserItem } from '../services/userService';
 
 // TODO : Pass user data through here to profile page and display the data : check the data passing method used in the details pages
 
 export default function ProfileScreen({ route, navigation }) {
 
-  const [username, setUserName] = useState('');
+  const [user, setUser] = useState([]);
+
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
 
   const [itemId, setItemId] = useState();
-  const [itemUserName, setItemUserName] = useState();
+  const [itemUsername, setItemUsername] = useState();
   const [itemEmail, setItemEmail] = useState();
   const [itemPassword, setItemPassword] = useState();
+
 
   const logout = () => {
     handleLogout(email, password)
@@ -38,26 +41,18 @@ export default function ProfileScreen({ route, navigation }) {
 
   useFocusEffect(
     React.useCallback(() => {
-      // handleGettingUserData()
-      // handleLogin()
+      handleGettingUserData();
       getloggedinUser() // * this get the currentrly logged in user 
-
-      // const { itemUserName, itemEmail, itemPassword } = route.params;
-      // setItemId(itemId)
-      // setItemUserName(itemUserName)
-      // setItemEmail(itemEmail)
-      // setItemPassword(itemPassword)
-
       return () => {
 
       }
     })
   )
 
-  // const handleGettingUserData = async () => {
-  //   var userData = await getUserData()
-  //   setUser(userData)
-  // }
+  const handleGettingUserData = async () => {
+    var userData = await getUserItem()
+    setUser(userData)
+  }
 
 
 
@@ -72,8 +67,8 @@ export default function ProfileScreen({ route, navigation }) {
           <View style={styles.profileTopSec}>
             <ProfilePicMain></ProfilePicMain>
             <View style={styles.userDataCon}>
-              <Text style={styles.userDataTitle}>the Users Name{ }</Text>
-              <Text style={styles.userDataBio}>email{itemEmail}</Text>
+              <Text style={styles.userDataTitle}>{user.username}</Text>
+              <Text style={styles.userDataBio}>email{user.email}</Text>
               <Text style={styles.userDataBio}>Person bio</Text>
               <DateJoined></DateJoined>
             </View>
@@ -216,7 +211,7 @@ const styles = StyleSheet.create({
   },
   dasBoardSecContentCon: {
     paddingTop: 20,
-    paddingBottom:20,
+    paddingBottom: 20,
     gap: 20,
     width: '100%',
     // flex:0,
@@ -253,7 +248,7 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     borderRadius: 22,
     padding: 10,
-    marginTop:20,
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
   }
