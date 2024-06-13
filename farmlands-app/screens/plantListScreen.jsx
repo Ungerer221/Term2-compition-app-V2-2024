@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, TouchableOpacity, FlatList, } from 'react-native'
+import { View, Text, StyleSheet, Pressable, TouchableOpacity, FlatList, ScrollView} from 'react-native'
 import React, { useState } from 'react'
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
@@ -34,45 +34,47 @@ export default function PlantListScreen({ navigation }) {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.infoCon}>
-                <Text style={styles.titleText01}>PlantListScreen</Text>
-                <Menu01IconList />
-            </View>
-            <Pressable style={styles.addButton} onPress={goToAdd}>
-                <AddCircleHalfDotIcon />
-            </Pressable>
-
-            {/* this is the card element */}
-            <View style={styles.cardCon}>
-                <View >
-                    <Text style={styles.cardConInfoText}>Plants</Text>
+        <ScrollView>
+            <View style={styles.container}>
+                <View style={styles.infoCon}>
+                    <Text style={styles.titleText01}>PlantListScreen</Text>
+                    <Menu01IconList />
                 </View>
-                {
-                    // just so that if there is empty data it doesnt bug out
-                    // first check if items is empty - if not empty then display map - empty then display text
-                    plantItems != [] ? (
-                        plantItems.map((item, index) => (
+                <Pressable style={styles.addButton} onPress={goToAdd}>
+                    <AddCircleHalfDotIcon />
+                </Pressable>
 
-                            <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("PlantDetail",
-                                {
-                                    itemID: item?.id, // here we are passing the data to the details page
-                                    itemName: item?.name,
-                                    itemDesc: item?.description, // here we are passing the data to the details page
-                                    itemGrowth: item?.growthTime,
-                                }
-                            )}>
-                                <Text>{item.name}</Text>
-                                {/* // when the item is a priority the star must show - with if statement */}
-                                {item.priority ? <AntDesign name="star" size={24} color="orange" /> : null}
-                            </TouchableOpacity>
-                        ))
-                    ) : (
-                        <Text>no items found</Text>
-                    )
-                }
+                {/* this is the card element */}
+                <View style={styles.cardCon}>
+                    <View >
+                        <Text style={styles.cardConInfoText}>Plants</Text>
+                    </View>
+                    {
+                        // just so that if there is empty data it doesnt bug out
+                        // first check if items is empty - if not empty then display map - empty then display text
+                        plantItems != [] ? (
+                            plantItems.map((item, index) => (
+
+                                <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("PlantDetail",
+                                    {
+                                        itemID: item?.id, // here we are passing the data to the details page
+                                        itemName: item?.name,
+                                        itemDesc: item?.description, // here we are passing the data to the details page
+                                        itemGrowth: item?.growthTime,
+                                    }
+                                )}>
+                                    <Text>{item.name}</Text>
+                                    {/* // when the item is a priority the star must show - with if statement */}
+                                    {item.priority ? <AntDesign name="star" size={24} color="orange" /> : null}
+                                </TouchableOpacity>
+                            ))
+                        ) : (
+                            <Text>no items found</Text>
+                        )
+                    }
+                </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -136,7 +138,7 @@ const styles = StyleSheet.create({
         fontWeight: '900',
         width: 200,
     },
-    cardConInfoText:{
+    cardConInfoText: {
         fontSize: 24,
         fontWeight: '700',
     },

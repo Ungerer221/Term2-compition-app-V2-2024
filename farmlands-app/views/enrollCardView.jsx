@@ -10,6 +10,9 @@ export default function EnrollCardView() {
     const [subEnrolledItems, setSubEnrolledItems] = useState([])
 
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+
+    const [selectedComp, setSelectedComp]= useState("")
 
     useFocusEffect(
         React.useCallback(() => {
@@ -34,8 +37,19 @@ export default function EnrollCardView() {
 
     // TODO: to add the user to the enrolled subCollection similar to adding the user from auth
     const handleSettingEnrollment = async () => {
-        // var enrollUserData = { username,}
-        addUserToComp()
+        // var enrollUserData = { username, email}
+        // addUserToComp()
+        // var enrolledUser = { username, email }
+        // var success = await addUserToComp(enrolledUser)
+
+        var enrolled = {
+            userName: username,
+            email: email,
+        }
+        var success = await addUserToComp(selectedComp, enrolled)
+        if (success) {
+            navigation.goBack() // ! navigation is not working 
+        }
     }
     const enrollUser = () => { handleSettingEnrollment() }
 
@@ -76,7 +90,7 @@ export default function EnrollCardView() {
                                 {/* // TODO : when pressing this button it will add the user to the enrolled collection in the competition  */}
                                 {/* // TODO : check Data routing. The user must be linked to the Competition data */}
                                 <TouchableOpacity style={styles.enrollBtn} onPress={enrollUser}>
-                                    <Text style={styles.enrollBtnText}>enroll</Text>
+                                    <Text style={styles.enrollBtnText}>Enroll</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>

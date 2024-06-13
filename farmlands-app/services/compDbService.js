@@ -18,11 +18,11 @@ export const createNewCompItem = async (item) => {
     }
 }
 
-// TODO: create a user doc in the competition list
-export const addUserToComp = async (compId, enrolledData) => {
+// TODO: create a user doc in the competition enrolled collection
+export const addUserToComp = async (competitionId, enrolledData) => {
     try {
         // 1. specify where we want the data to be added
-        const compRef = doc(db, "competitions", compId) // target a specific document see (dayId)
+        const compRef = doc(db, "competitions", competitionId) // target a specific document see (dayId)
 
         // 2. specifiy sub collection in this document where we want to add doc
         const enrolledRef = collection(compRef, "enrolled")
@@ -34,7 +34,7 @@ export const addUserToComp = async (compId, enrolledData) => {
         return true // success
 
     } catch (e) {
-        console.log("something went wong" + e)
+        console.log("Could Not Add User To Collection" + e)
         return false // failed
     }
 }

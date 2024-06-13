@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Pressable, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import { getAllCompsList } from '../services/compDbService'
@@ -32,47 +32,49 @@ export default function CompListScreen({ navigation }) {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.infoCon}>
-                <Text style={styles.titleText01}>CompListScreen</Text>
-                <Menu01IconList />
-            </View>
-            <Pressable style={styles.addButton} onPress={goToAdd}>
-                {/* <Text style={styles.addButtonText}>Add</Text> */}
-                <AddCircleHalfDotIcon />
-            </Pressable>
-            {/* this is the card element */}
-            <View style={styles.cardCon}>
-                <View >
-                    <Text style={styles.cardConInfoText}>Current Compitions</Text>
+        <ScrollView>
+            <View style={styles.container}>
+                <View style={styles.infoCon}>
+                    <Text style={styles.titleText01}>CompListScreen</Text>
+                    <Menu01IconList />
                 </View>
-                {
-                    // just so that if there is empty data it doesnt bug out
-                    // first check if items is empty - if not empty then display map - empty then display text
-                    compItems != [] ? (
-                        compItems.map((item, index) => (
+                <Pressable style={styles.addButton} onPress={goToAdd}>
+                    {/* <Text style={styles.addButtonText}>Add</Text> */}
+                    <AddCircleHalfDotIcon />
+                </Pressable>
+                {/* this is the card element */}
+                <View style={styles.cardCon}>
+                    <View >
+                        <Text style={styles.cardConInfoText}>Current Compitions</Text>
+                    </View>
+                    {
+                        // just so that if there is empty data it doesnt bug out
+                        // first check if items is empty - if not empty then display map - empty then display text
+                        compItems != [] ? (
+                            compItems.map((item, index) => (
 
-                            <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("CompDetail",
-                                {
-                                    itemID: item?.id, // here we are passing the data to the details page
-                                    itemName: item?.name,
-                                    itemDesc: item?.description, // here we are passing the data to the details page
-                                    itemEndDay: item?.endDay,
-                                    itemEndMonth: item?.endMonth,
-                                    itemEndYear: item?.endYear,
-                                }
-                            )}>
-                                <Text>{item.name}</Text>
-                                {/* // when the item is a priority the star must show - with if statement */}
-                                {/* {item.priority ? <AntDesign name="star" size={24} color="orange" /> : null} */}
-                            </TouchableOpacity>
-                        ))
-                    ) : (
-                        <Text>no items found</Text>
-                    )
-                }
+                                <TouchableOpacity key={index} style={styles.card} onPress={() => navigation.navigate("CompDetail",
+                                    {
+                                        itemID: item?.id, // here we are passing the data to the details page
+                                        itemName: item?.name,
+                                        itemDesc: item?.description, // here we are passing the data to the details page
+                                        itemEndDay: item?.endDay,
+                                        itemEndMonth: item?.endMonth,
+                                        itemEndYear: item?.endYear,
+                                    }
+                                )}>
+                                    <Text>{item.name}</Text>
+                                    {/* // when the item is a priority the star must show - with if statement */}
+                                    {/* {item.priority ? <AntDesign name="star" size={24} color="orange" /> : null} */}
+                                </TouchableOpacity>
+                            ))
+                        ) : (
+                            <Text>no items found</Text>
+                        )
+                    }
+                </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 const styles = StyleSheet.create({

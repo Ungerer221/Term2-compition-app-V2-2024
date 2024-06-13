@@ -15,7 +15,7 @@ export const getAllUsersList = async () => {
     querySnapShot.forEach((doc) => {
         allUsers.push({ ...doc.data(), id: doc.id })
     })
-    console.log("get all users Log")
+    // console.log("get all users Log")
     // console.log(allUsers)
     return allUsers
 }

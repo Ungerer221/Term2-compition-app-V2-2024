@@ -5,9 +5,11 @@ import { deletePlant, deletePlantItem, getPlantItem, updatePlantItem } from '../
 import { deleteCompItem, getCompItem } from '../services/compDbService';
 import Sun01Icon from '../icons/sun-01-stroke-rounded';
 import Delete02IconW from '../icons/delete-02-stroke-roundedW';
+import { QuerySnapshot, collection, doc, onSnapshot, query } from '@firebase/firestore';
+import { db } from '../config/firebase';
 
 
-export default function CompDetailsScreen({ route, navigation }) {
+export default function CompDetailsScreen({ route, navigation,},props) {
 
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -19,6 +21,8 @@ export default function CompDetailsScreen({ route, navigation }) {
     const [itemEndMonth, setItemEndMonth] = useState()
     const [itemEndYear, setItemEndYear] = useState()
 
+    const { competition } = props
+    const [enrolled, setEnrolled] = useState([]);
 
     useFocusEffect(
         React.useCallback(() => {
@@ -31,7 +35,23 @@ export default function CompDetailsScreen({ route, navigation }) {
             setItemEndDay(itemEndDay)
             setItemEndMonth(itemEndMonth)
             setItemEndYear(itemEndYear)
-        })
+
+            const compRef = doc(db, "competitions", competition.id)
+            const enrolledRef = collection(compRef, "enrolled")
+
+            const unsubscribe = onSnapshot(enrolledRef, (querySnapshot) => {
+                const enrolledData = [];
+                querySnapshot.forEach((doc) => {
+                    enrolledData.push(doc.data());
+                    console.log("Current enrolled: ", doc.data());
+                });
+                setEnrolled(enrolledData)
+            });
+            return () => {
+                console.log("OutOfview")
+                unsubscribe()
+            }
+        }, [])
     )
 
     // ! these dont do anything 
@@ -81,14 +101,25 @@ export default function CompDetailsScreen({ route, navigation }) {
                     </View>
                     <View>
                         <TouchableOpacity style={styles.enrollBtn}>
-                            <Text style={styles.enrollBtnText}>Update</Text>
+                            <Text style={styles.enrollBtnText}>Enroll</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
 
+                {/* show current users in the competition */}
+                <View>
+                    {enrolled != [] ? (
+                        enrolled.map((item) => (
+                            <View key={item.time}>
+                                <Text>{item.username}</Text>
+                            </View>
+                        ))
+                    ) : <Text></Text>}
+                </View>
+
                 <TouchableOpacity
                     style={styles.deleteButton}
-                    // onPress={handleDeleteCompItem}
+                // onPress={handleDeleteCompItem}
                 >
                     {/* <Text>Delete</Text> */}
                     <Delete02IconW />
@@ -199,6 +230,6 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         justifyContent: 'center',
         alignItems: 'center',
-        
+
     }
 })
