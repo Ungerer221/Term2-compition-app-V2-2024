@@ -20,7 +20,7 @@ export default function TotalScoreTile() {
             handleGettingUserData()
             return () => {
             }
-        })
+        },[])
     )
 
     return (

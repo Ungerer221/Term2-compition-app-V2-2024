@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, TextInput, 
 import React, { useEffect, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import { deletePlant, deletePlantItem, getPlantItem, updatePlantItem } from '../services/plantDbService'
-import { deleteCompItem, getCompItem } from '../services/compDbService';
+import { addUserToComp, deleteCompItem, getCompItem } from '../services/compDbService';
 import Sun01Icon from '../icons/sun-01-stroke-rounded';
 import Delete02IconW from '../icons/delete-02-stroke-roundedW';
 import { QuerySnapshot, collection, doc, onSnapshot, query } from '@firebase/firestore';
@@ -14,6 +14,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
     const [modalVisible, setModalVisible] = useState(false);
 
     const [compItem, setCompItem] = useState([])
+
     const [itemId, setItemId] = useState()
     const [itemName, setItemName] = useState()
     const [itemDescription, setItemDescription] = useState()
@@ -36,6 +37,8 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
             setItemEndMonth(itemEndMonth)
             setItemEndYear(itemEndYear)
 
+            // handleSettingEnrollment()
+
             const compRef = doc(db, "competitions", itemID)
             const enrolledRef = collection(compRef, "enrolled")
 
@@ -54,17 +57,15 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
         }, [])
     )
 
-    // ! these dont do anything 
-    // get item data : getting from scratch // TODO : Check this if it is nessecery and if its working
-    // const handleGettingCompItemData = async (itemID) => {
-    //     var itemData = await getCompItem(itemID)
-    //     setCompItem(itemData)
-    // }
+     // TODO: to add the user to the enrolled subCollection similar to adding the user from auth
+     const handleSettingEnrollment = async () => {
+        var compData = await addUserToComp(itemId, {"username":"brian","email":"j@gmail.com"} ) // this must be the user object
+        setCompItem(compData)
+        // addUserToComp(),
+        console.log("pressed")
+    }
 
-    // const handleDeleteCompItem = async (itemID)=>{
-    //     var itemData = await deleteCompItem(itemID)
-    //     setCompItem(itemData)
-    // }
+    const enrollUser = () => { handleSettingEnrollment()}
 
     return (
         <ScrollView>
@@ -79,7 +80,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
                         <View style={styles.enrollCardTitleRow}>
                             <View style={styles.enrollCardTitleCon}>
                                 <Text style={styles.enrollCardTitle}>{itemName}</Text>
-                                <Text style={styles.enrollText03}>(1/7)</Text>
+                                <Text style={styles.enrollText03}>(1/9)</Text>
                             </View>
                             <Sun01Icon />
                         </View>
@@ -101,7 +102,8 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
                             </View>
                         </View>
                         <View>
-                            <TouchableOpacity style={styles.enrollBtn}>
+                            {/* the enroll button */}
+                            <TouchableOpacity style={styles.enrollBtn} onPress={enrollUser}>
                                 <Text style={styles.enrollBtnText}>Enroll</Text>
                             </TouchableOpacity>
                         </View>
@@ -109,6 +111,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
 
                     {/* show current users in the competition */}
                     <View style={styles.usersListCon}>
+                        <Text>Current Participents in this Competition:</Text>
                         {enrolled != [] ? (
                             enrolled.map((item, index) => (
                                 <View key={index} style={styles.usersListItem}>

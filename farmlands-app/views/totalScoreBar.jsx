@@ -20,7 +20,7 @@ export default function TotalScoreBar() {
             handleGettingUserData()
             return () => {
             }
-        })
+        },[])
     )
 
     return (

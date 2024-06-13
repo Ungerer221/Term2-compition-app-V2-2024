@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { auth, getAuth } from "../config/firebase";
+// import { auth, getAuth } from "../config/firebase";
 // views
 import TopNavBar from '../views/topNavBar';
 // componenets
@@ -16,6 +16,7 @@ import LogoutCircle02Icon from '../icons/logout-circle-02-stroke-rounded';
 import { getloggedinUser, handleLogin, handleLogout } from '../services/authService';
 import { useFocusEffect } from '@react-navigation/native';
 import { fetchUserData, getUserData, getUserItem } from '../services/userService';
+import { getAuth } from 'firebase/auth';
 
 // TODO : Pass user data through here to profile page and display the data : check the data passing method used in the details pages
 
@@ -44,9 +45,9 @@ export default function ProfileScreen({ route, navigation }) {
 
   useFocusEffect(
     React.useCallback(() => {
-      handleGettingUserData()
       
-      getloggedinUser() // * this get the currentrly logged in user 
+      
+      // getloggedinUser() // * this get the currentrly logged in user 
       return () => {
       }
     },[])
@@ -60,6 +61,7 @@ export default function ProfileScreen({ route, navigation }) {
   useEffect(() => {
     // getUserData()
     // fetchUserData()
+    handleGettingUserData()
   }, []);
 
   return (

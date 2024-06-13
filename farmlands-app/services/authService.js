@@ -85,7 +85,7 @@ export const getloggedinUser = async () => {
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
         // ...
-        console.log(uid)
+        // console.log(uid)
         return uid // if you wan to return data froma function
     } else {
         // User is signed out

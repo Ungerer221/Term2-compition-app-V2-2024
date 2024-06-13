@@ -33,6 +33,7 @@ export const addUserToComp = async (competitionId, enrolledData) => {
         console.log("success adding doc id: " + docRef.id)
         return true // success
 
+
     } catch (e) {
         console.log("Could Not Add User To Collection" + e)
         return false // failed
