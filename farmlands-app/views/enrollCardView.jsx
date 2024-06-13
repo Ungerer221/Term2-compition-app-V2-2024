@@ -12,7 +12,7 @@ export default function EnrollCardView() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
 
-    const [selectedComp, setSelectedComp]= useState("")
+    const [selectedComp, setSelectedComp]= useState("") // for the selescted competition
 
     useFocusEffect(
         React.useCallback(() => {
@@ -31,13 +31,13 @@ export default function EnrollCardView() {
 
     // getting all subcollection data
     const handleGettingSubEnrolledData = async () => {
-        var allEnrolledData = await getAllSubCompItems()
+        var allEnrolledData = await getAllSubCompItems(id) // need to have the competitions id passed in the barcket
         setSubEnrolledItems(allEnrolledData)
     }
 
     // TODO: to add the user to the enrolled subCollection similar to adding the user from auth
     const handleSettingEnrollment = async () => {
-        // var enrollUserData = { username, email}
+        var enrollUserData = { username, email}
         // addUserToComp()
         // var enrolledUser = { username, email }
         // var success = await addUserToComp(enrolledUser)
@@ -46,9 +46,12 @@ export default function EnrollCardView() {
             userName: username,
             email: email,
         }
+
+        // ? fetch the data to get the current user info
+
         var success = await addUserToComp(selectedComp, enrolled)
         if (success) {
-            navigation.goBack() // ! navigation is not working 
+            navigation.goBack()
         }
     }
     const enrollUser = () => { handleSettingEnrollment() }

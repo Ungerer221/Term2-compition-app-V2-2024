@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, TextInput, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import { deletePlant, deletePlantItem, getPlantItem, updatePlantItem } from '../services/plantDbService'
@@ -9,7 +9,7 @@ import { QuerySnapshot, collection, doc, onSnapshot, query } from '@firebase/fir
 import { db } from '../config/firebase';
 
 
-export default function CompDetailsScreen({ route, navigation,},props) {
+export default function CompDetailsScreen({ route, navigation, }, props) {
 
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -36,7 +36,7 @@ export default function CompDetailsScreen({ route, navigation,},props) {
             setItemEndMonth(itemEndMonth)
             setItemEndYear(itemEndYear)
 
-            const compRef = doc(db, "competitions", competition.id)
+            const compRef = doc(db, "competitions", itemID)
             const enrolledRef = collection(compRef, "enrolled")
 
             const unsubscribe = onSnapshot(enrolledRef, (querySnapshot) => {
@@ -67,67 +67,71 @@ export default function CompDetailsScreen({ route, navigation,},props) {
     // }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.container02}>
-                <View style={styles.infoCon}>
-                    <Text style={styles.titleText01}>Item Details</Text>
-                    <Sun01Icon />
-                </View>
-                {/* card view */}
-                <View style={styles.enrollCard}>
-                    <View style={styles.enrollCardTitleRow}>
-                        <View style={styles.enrollCardTitleCon}>
-                            <Text style={styles.enrollCardTitle}>{itemName}</Text>
-                            <Text style={styles.enrollText03}>(1/7)</Text>
-                        </View>
+        <ScrollView>
+            <View style={styles.container}>
+                <View style={styles.container02}>
+                    <View style={styles.infoCon}>
+                        <Text style={styles.titleText01}>Item Details</Text>
                         <Sun01Icon />
                     </View>
-                    <Text>Description : {itemDescription}</Text>
-                    <View style={styles.enrollDateMainContainer}>
-                        <Text style={styles.enrollText03}>End Date:</Text>
-                        <View style={styles.enrollCardDateCon}>
-                            <View style={styles.enrollCardDateBlock}>
-                                <Text style={styles.enrollText02}>{itemEndDay}</Text>
+                    {/* card view */}
+                    <View style={styles.enrollCard}>
+                        <View style={styles.enrollCardTitleRow}>
+                            <View style={styles.enrollCardTitleCon}>
+                                <Text style={styles.enrollCardTitle}>{itemName}</Text>
+                                <Text style={styles.enrollText03}>(1/7)</Text>
                             </View>
-                            <Text style={styles.enrollText02}>:</Text>
-                            <View style={styles.enrollCardDateBlock}>
-                                <Text style={styles.enrollText02}>{itemEndMonth}</Text>
-                            </View>
-                            <Text style={styles.enrollText02}>:</Text>
-                            <View style={styles.enrollCardDateBlock}>
-                                <Text style={styles.enrollText02}>{itemEndYear}</Text>
+                            <Sun01Icon />
+                        </View>
+                        <Text>Description : {itemDescription}</Text>
+                        <View style={styles.enrollDateMainContainer}>
+                            <Text style={styles.enrollText03}>End Date:</Text>
+                            <View style={styles.enrollCardDateCon}>
+                                <View style={styles.enrollCardDateBlock}>
+                                    <Text style={styles.enrollText02}>{itemEndDay}</Text>
+                                </View>
+                                <Text style={styles.enrollText02}>:</Text>
+                                <View style={styles.enrollCardDateBlock}>
+                                    <Text style={styles.enrollText02}>{itemEndMonth}</Text>
+                                </View>
+                                <Text style={styles.enrollText02}>:</Text>
+                                <View style={styles.enrollCardDateBlock}>
+                                    <Text style={styles.enrollText02}>{itemEndYear}</Text>
+                                </View>
                             </View>
                         </View>
+                        <View>
+                            <TouchableOpacity style={styles.enrollBtn}>
+                                <Text style={styles.enrollBtnText}>Enroll</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                    <View>
-                        <TouchableOpacity style={styles.enrollBtn}>
-                            <Text style={styles.enrollBtnText}>Enroll</Text>
-                        </TouchableOpacity>
+
+                    {/* show current users in the competition */}
+                    <View style={styles.usersListCon}>
+                        {enrolled != [] ? (
+                            enrolled.map((item, index) => (
+                                <View key={index} style={styles.usersListItem}>
+                                    {/* <Text>{item.name}</Text> */}
+                                    <Text>{item.username}</Text>
+                                    <Text>{item.email}</Text>
+                                </View>
+                            ))
+                        ) : <Text></Text>}
                     </View>
+
+                    <TouchableOpacity
+                        style={styles.deleteButton}
+                    // onPress={handleDeleteCompItem}
+                    >
+                        {/* <Text>Delete</Text> */}
+                        <Delete02IconW />
+                    </TouchableOpacity>
+
                 </View>
-
-                {/* show current users in the competition */}
-                <View>
-                    {enrolled != [] ? (
-                        enrolled.map((item) => (
-                            <View key={item.time}>
-                                <Text>{item.username}</Text>
-                            </View>
-                        ))
-                    ) : <Text></Text>}
-                </View>
-
-                <TouchableOpacity
-                    style={styles.deleteButton}
-                // onPress={handleDeleteCompItem}
-                >
-                    {/* <Text>Delete</Text> */}
-                    <Delete02IconW />
-                </TouchableOpacity>
-
+                {/* <Text>CompDetailsScreen:{itemName}</Text> */}
             </View>
-            <Text>CompDetailsScreen:{itemName}</Text>
-        </View>
+        </ScrollView>
     )
 }
 const styles = StyleSheet.create({
@@ -137,6 +141,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         width: '100%',
+        
         // backgroundColor:'gray',
         padding: 20,
         gap: 20,
@@ -231,5 +236,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
 
+    },
+    usersListCon: {
+        gap: 10,
+    },
+    usersListItem: {
+        flexDirection: 'row',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderWidth: 2,
+        borderRadius: 12,
+        gap: 10,
     }
 })
