@@ -12,7 +12,7 @@ export default function EnrollCardView() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
 
-    const [selectedComp, setSelectedComp]= useState("") // for the selescted competition
+    const [selectedComp, setSelectedComp] = useState("") // for the selescted competition
 
     useFocusEffect(
         React.useCallback(() => {
@@ -37,7 +37,7 @@ export default function EnrollCardView() {
 
     // TODO: to add the user to the enrolled subCollection similar to adding the user from auth
     const handleSettingEnrollment = async () => {
-        var enrollUserData = { username, email}
+        var enrollUserData = { username, email }
         // addUserToComp()
         // var enrolledUser = { username, email }
         // var success = await addUserToComp(enrolledUser)
