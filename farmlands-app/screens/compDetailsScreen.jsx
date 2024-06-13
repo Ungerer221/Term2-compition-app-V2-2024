@@ -26,6 +26,8 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
     const { competition } = props
     const [enrolled, setEnrolled] = useState([]);
     const [user, setUser] = useState([]);
+    const [totalEnrolled, setTotalEnrolled] = useState();
+
     const [enrollUsername, setEnrollUsername] = useState()
     const [enrollEmail, setEnrollEmail] = useState()
 
@@ -52,9 +54,13 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
                 const enrolledData = [];
                 querySnapshot.forEach((doc) => {
                     enrolledData.push(doc.data());
-                    console.log("Current enrolled: ", doc.data());
+                    // console.log("Current enrolled: ", doc.data());
                 });
                 setEnrolled(enrolledData)
+
+                var numberOfEnrolled = enrolledData.length
+                setTotalEnrolled(numberOfEnrolled)
+                console.log(numberOfEnrolled)
             });
             return () => {
                 console.log("OutOfview")
@@ -65,7 +71,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
 
 
     // need to call the current user data
-    const getCurrentUserData = async()=>{
+    const getCurrentUserData = async () => {
         var userData = await getUserItem()
         setUser(userData)
     }
@@ -94,7 +100,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
                         <View style={styles.enrollCardTitleRow}>
                             <View style={styles.enrollCardTitleCon}>
                                 <Text style={styles.enrollCardTitle}>{itemName}</Text>
-                                <Text style={styles.enrollText03}>(1/9)</Text>
+                                <Text style={styles.enrollText03}>({totalEnrolled})</Text>
                             </View>
                             <Sun01Icon />
                         </View>
