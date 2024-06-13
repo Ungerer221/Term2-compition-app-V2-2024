@@ -7,6 +7,7 @@ import Sun01Icon from '../icons/sun-01-stroke-rounded';
 import Delete02IconW from '../icons/delete-02-stroke-roundedW';
 import { QuerySnapshot, collection, doc, onSnapshot, query } from '@firebase/firestore';
 import { db } from '../config/firebase';
+import { getUserItem } from '../services/userService';
 
 
 export default function CompDetailsScreen({ route, navigation, }, props) {
@@ -24,6 +25,9 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
 
     const { competition } = props
     const [enrolled, setEnrolled] = useState([]);
+    const [user, setUser] = useState([]);
+    const [enrollUsername, setEnrollUsername] = useState()
+    const [enrollEmail, setEnrollEmail] = useState()
 
     useFocusEffect(
         React.useCallback(() => {
@@ -38,6 +42,8 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
             setItemEndYear(itemEndYear)
 
             // handleSettingEnrollment()
+            getCurrentUserData()
+            // console.log(getCurrentUserData)
 
             const compRef = doc(db, "competitions", itemID)
             const enrolledRef = collection(compRef, "enrolled")
@@ -57,15 +63,23 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
         }, [])
     )
 
-     // TODO: to add the user to the enrolled subCollection similar to adding the user from auth
-     const handleSettingEnrollment = async () => {
-        var compData = await addUserToComp(itemId, {"username":"brian","email":"j@gmail.com"} ) // this must be the user object
+
+    // need to call the current user data
+    const getCurrentUserData = async()=>{
+        var userData = await getUserItem()
+        setUser(userData)
+    }
+
+
+    // TODO: to add the user to the enrolled subCollection similar to adding the user from auth
+    const handleSettingEnrollment = async () => {
+        var compData = await addUserToComp(itemId, user) // this must be the user object
         setCompItem(compData)
         // addUserToComp(),
         console.log("pressed")
     }
 
-    const enrollUser = () => { handleSettingEnrollment()}
+    const enrollUser = () => { handleSettingEnrollment() }
 
     return (
         <ScrollView>
@@ -144,7 +158,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         width: '100%',
-        
+
         // backgroundColor:'gray',
         padding: 20,
         gap: 20,
