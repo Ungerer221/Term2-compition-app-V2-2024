@@ -21,11 +21,7 @@ export default function NewsScreen({ navigation }) {
   const signout = () => { handleSignout() }
   return (
     <View style={styles.container}>
-
       <TopNavBar />
-
-      <Text>newsScreen</Text>
-
       {/* caution banner  */}
       <View style={styles.cautionBannerCon}>
         <View style={styles.cautionBannerRow}>
@@ -79,7 +75,7 @@ const styles = StyleSheet.create({
     padding: 20,
     gap: 20,
     overflow: 'hidden',
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 22,
     borderColor: 'black',
     width: 350,

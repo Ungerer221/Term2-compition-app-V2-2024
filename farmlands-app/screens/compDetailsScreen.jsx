@@ -8,6 +8,7 @@ import Delete02IconW from '../icons/delete-02-stroke-roundedW';
 import { QuerySnapshot, collection, doc, onSnapshot, query } from '@firebase/firestore';
 import { db } from '../config/firebase';
 import { getUserItem } from '../services/userService';
+import UserCircleIcon from '../icons/user-circle-stroke-rounded';
 
 
 export default function CompDetailsScreen({ route, navigation, }, props) {
@@ -136,8 +137,11 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
                             enrolled.map((item, index) => (
                                 <View key={index} style={styles.usersListItem}>
                                     {/* <Text>{item.name}</Text> */}
-                                    <Text>{item.username}</Text>
-                                    <Text>{item.email}</Text>
+                                    <View>
+                                        <Text style={styles.usersListItemheadingText}>{item.username}</Text>
+                                        <Text>{item.email}</Text>
+                                    </View>
+                                    <UserCircleIcon />
                                 </View>
                             ))
                         ) : <Text></Text>}
@@ -156,13 +160,13 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         width: '100%',
         height: '100%',
-        minHeight:850,
+        minHeight: 850,
         // backgroundColor:'gray',
         padding: 20,
         gap: 20,
     },
     container02: {
-        marginTop:50,
+        marginTop: 50,
         width: '100%',
         // height: '100%',
         padding: 10,
@@ -179,7 +183,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
-        backgroundColor:'#B2DFE9',
+        backgroundColor: '#B2DFE9',
     },
     titleText01: {
         fontSize: 24,
@@ -194,7 +198,7 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         marginTop: 10,
         gap: 10,
-        backgroundColor:'#E0E9EB',
+        backgroundColor: '#E0E9EB',
     },
     enrollCardTitleRow: {
         flexDirection: 'row',
@@ -233,7 +237,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: 'black',
         borderRadius: 12,
-        backgroundColor:'#fff'
+        backgroundColor: '#fff'
     },
     enrollBtn: {
         backgroundColor: '#A597DE',
@@ -262,10 +266,16 @@ const styles = StyleSheet.create({
     },
     usersListItem: {
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderWidth: 2,
         borderRadius: 12,
         gap: 10,
+    },
+    usersListItemheadingText:{
+        fontSize:16,
+        fontWeight:"900",
     }
 })

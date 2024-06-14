@@ -1,6 +1,11 @@
 # Term2_Compitition_Application_2024
  This is the repo for our term 2 application term project. For this project we were tasked with creating a compitition application of any kind. 
 
+# Licensing 
+>Note: [warning]
+> This app is my own app and I reserve all rights 
+
+
 ## Content
 
 - [Code Used](#code-used)
@@ -23,6 +28,8 @@
 
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
+<br>
+
 # prerequisite
 
 for this project you will need
@@ -30,6 +37,8 @@ for this project you will need
 2. to install [nodeJs](https://nodejs.org/en) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 3. to have [expo](https://expo.dev) or expoGo app on your phone - download for app store or google play store ![Expo](https://img.shields.io/badge/expo-1C1E24?style=for-the-badge&logo=expo&logoColor=#D04A37)
 4. [firebase](https://firebase.google.com/) acount and a database setup ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
+
+<br>
 
 # How to Install and Setup
 
@@ -77,6 +86,8 @@ npx expo start
 npx create-expo-app app-name
 ```
 
+<br>
+
 # App Features & Functionality 
 
 The apps current features and functionality 
@@ -110,6 +121,7 @@ The apps current features and functionality
 1. create competitions and competition data
 2. create plants and plant data 
 
+<br>
 
 # Featurs Still to be implemented
 
@@ -118,7 +130,24 @@ The apps current features and functionality
     This will allow for better score management as the score is handled within the competition > enrolled > user.doc - making the score specific to the user in that competition.
     meaning that no matter the winning conditions it can be adjusted to for each competition and can then easily compare the users unique score to the competition requirment and then declair a winner
 
+2. Preloaders 
+
+<br>
+
 # Tributes 
+
+## Code Documentation
+
+![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
+For [Firebase](https://firebase.google.com/docs?hl=en&authuser=0&_gl=1*b7euly*_ga*NTc5MzI4MTI2LjE3MTQwMzM1Mjk.*_ga_CW55HF8NVT*MTcxODM3MTM1NS41OC4xLjE3MTgzNzE1MTkuMTkuMC4w)
+
+![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+React [Navigation](https://reactnavigation.org/docs/getting-started/)
+
+React Native [Keyboard](https://reactnative.dev/docs/keyboard)
+    Doceumentation to get the keyboard to dismiss when the user taps any where but the keyboard
+
+
 
 ## Illustration 
 
@@ -129,3 +158,8 @@ LeaderboardImage Illustration on the complist screen
 
 HugeIcons
 [HugeiconsLibrary](https://hugeicons.com/icons)
+
+## Badges in readme file 
+
+The GitHub repo where i got all the badges to display in the readme
+[markdown-badges](https://github.com/Ileriayo/markdown-badges/blob/master/README.md)
