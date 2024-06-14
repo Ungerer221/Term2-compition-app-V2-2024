@@ -30,7 +30,7 @@
 
 <br>
 
-# prerequisite
+# Prerequisite
 
 for this project you will need
 1. visualStudio Code ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
@@ -48,7 +48,7 @@ for this project you will need
 ## Create expo app with Js template 
 To create you expo app with the lastest js Template. Follow these steps.
 
-1. 1st you after installing Node.js and Vs-code you want to set up you app - (in your vs terminal)
+**1st** you after installing Node.js and Vs-code you want to set up you app - (in your vs terminal)
 
 ```
 npx create-expo-app@latest --template blank@sdk-50
@@ -56,19 +56,19 @@ npx create-expo-app@latest --template blank@sdk-50
 
 then change the app name or just press enter for "app-name"
 
-2. 2nd Change your directory to current working folder
+**2nd** Change your directory to current working folder
 
 ```
 cd app-name
 ```
 
-3. 3rd You want to update the Current SDK version of expo to the most recent one
+**3rd** You want to update the Current SDK version of expo to the most recent one
 
 ```
 npm install expo@latest
 ```
 
-4. 4th To start your application 
+**4th** To start your application 
 
 ```
 npm start
