@@ -119,8 +119,8 @@ export function AdminStack() {
       <Stack.Screen name="PlantList" component={PlantListScreen} />
       <Stack.Screen name="Admin" component={AdminScreen} />
       <Stack.Screen name="PlantDetail" component={PlantDetailsScreen} />
-      <Stack.Screen name="CompList" component={CompListScreen} />
-      <Stack.Screen name="CompDetail" component={CompDetailsScreen} />
+      {/* <Stack.Screen name="CompList" component={CompListScreen} /> */}
+      {/* <Stack.Screen name="CompDetail" component={CompDetailsScreen} /> */}
       <Stack.Screen name="CompAdd" component={CompAddScreen} />
       <Stack.Screen name="UserList" component={UserListScreen} />
     </Stack.Navigator>
@@ -133,6 +133,10 @@ export function HomeStack() {
       <Stack.Screen name="Home" component={Home02Screen} />
       <Stack.Screen name="EnrollScreen" component={EnrollScreen} />
       <Stack.Screen name="enroll" component={EnrollCompView} />
+      {/* functional */}
+      <Stack.Screen name="CompList" component={CompListScreen} />
+      <Stack.Screen name="CompDetail" component={CompDetailsScreen} />
+
     </Stack.Navigator>
   )
 }

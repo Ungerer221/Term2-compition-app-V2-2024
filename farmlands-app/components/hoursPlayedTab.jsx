@@ -22,7 +22,6 @@ export default function HoursPlayedTab() {
 const styles = StyleSheet.create({
     container: {
         flexDirection:'row',
-        maxWidth:350,
         justifyContent:'space-between',
         width: '100%',
         // backgroundColor: '#fff',

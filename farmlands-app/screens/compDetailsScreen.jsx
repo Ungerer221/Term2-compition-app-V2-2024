@@ -131,7 +131,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
 
                     {/* show current users in the competition */}
                     <View style={styles.usersListCon}>
-                        <Text>Current Participents in this Competition:</Text>
+                        <Text style={styles.enrollText03}>Current Participents in this Competition:</Text>
                         {enrolled != [] ? (
                             enrolled.map((item, index) => (
                                 <View key={index} style={styles.usersListItem}>
@@ -142,15 +142,6 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
                             ))
                         ) : <Text></Text>}
                     </View>
-
-                    <TouchableOpacity
-                        style={styles.deleteButton}
-                    // onPress={handleDeleteCompItem}
-                    >
-                        {/* <Text>Delete</Text> */}
-                        <Delete02IconW />
-                    </TouchableOpacity>
-
                 </View>
                 {/* <Text>CompDetailsScreen:{itemName}</Text> */}
             </View>
@@ -164,18 +155,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         width: '100%',
-
+        height: '100%',
+        minHeight:850,
         // backgroundColor:'gray',
         padding: 20,
         gap: 20,
     },
     container02: {
+        marginTop:50,
         width: '100%',
-        height: '100%',
+        // height: '100%',
         padding: 10,
         borderWidth: 2,
         borderRadius: 22,
         gap: 20,
+        // backgroundColor:'red',
     },
     infoCon: {
         width: '100%',
@@ -184,7 +178,8 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor:'#B2DFE9',
     },
     titleText01: {
         fontSize: 24,
@@ -199,6 +194,7 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         marginTop: 10,
         gap: 10,
+        backgroundColor:'#E0E9EB',
     },
     enrollCardTitleRow: {
         flexDirection: 'row',
@@ -237,6 +233,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: 'black',
         borderRadius: 12,
+        backgroundColor:'#fff'
     },
     enrollBtn: {
         backgroundColor: '#A597DE',

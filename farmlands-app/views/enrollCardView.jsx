@@ -1,10 +1,14 @@
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import Sun01Icon from '../icons/sun-01-stroke-rounded'
-import { useFocusEffect } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { addUserToComp, getAllCompsList, getAllSubCompItems } from '../services/compDbService'
 
 export default function EnrollCardView() {
+
+    const navigation = useNavigation();
+
+    const goToCompetitionItem = () => { navigation.navigate("CompDetail") }
 
     const [compItems, setCompItems] = useState([])
     const [subEnrolledItems, setSubEnrolledItems] = useState([])
@@ -92,8 +96,8 @@ export default function EnrollCardView() {
                             <View>
                                 {/* // TODO : when pressing this button it will add the user to the enrolled collection in the competition  */}
                                 {/* // TODO : check Data routing. The user must be linked to the Competition data */}
-                                <TouchableOpacity style={styles.enrollBtn} onPress={enrollUser}>
-                                    <Text style={styles.enrollBtnText}>Enroll</Text>
+                                <TouchableOpacity style={styles.enrollBtn} onPress={goToCompetitionItem}>
+                                    <Text style={styles.enrollBtnText}>View</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>

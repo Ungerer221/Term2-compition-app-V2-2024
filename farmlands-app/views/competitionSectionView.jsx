@@ -24,7 +24,7 @@ export default function CompetitionSectionView() {
                 // Useful for cleanup functions
                 // DO NOTHING
             }
-        },[])
+        }, [])
     )
 
     // ? is this slowing down my app
@@ -53,6 +53,7 @@ export default function CompetitionSectionView() {
                     </View>
                     <Text>Enroll in challenges and competitions to earn points and climb to the top</Text>
                 </View>
+                
                 <View style={styles.compInfoTitleBox02}>
                     <View style={styles.titleBox03}>
                         <Text style={styles.fontHeading03}>Current Competitors:</Text>
@@ -70,7 +71,7 @@ export default function CompetitionSectionView() {
                 />
             </View>
             <View style={styles.buttonCon}>
-                <TouchableOpacity style={styles.enrollViewButton} onPress={() => navigation.navigate('EnrollScreen')}>
+                <TouchableOpacity style={styles.enrollViewButton} onPress={() => navigation.navigate('CompList')}>
                     <Text style={styles.enrollViewButtonText}>View</Text>
                 </TouchableOpacity>
             </View>

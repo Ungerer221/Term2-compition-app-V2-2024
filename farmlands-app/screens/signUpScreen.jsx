@@ -18,7 +18,7 @@ export default function SignUpScreen({ navigation }) {
     const [username, setUsername] = useState(''); // uses the onchange value
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [score, setScore] = useState('00'); // to set the initial score upon creating to zero
+    const [score, setScore] = useState(0); // to set the initial score upon creating to zero
     const [date, setDate] = useState(new Date());
 
 

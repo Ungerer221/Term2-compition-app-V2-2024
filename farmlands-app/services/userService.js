@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs, query, orderBy, Firestore, } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, orderBy, Firestore, where, } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
@@ -10,7 +10,7 @@ import { getloggedinUser } from "./authService";
 export const getAllUsersList = async () => {
     var allUsers = []
 
-    var q = query(collection(db, "users"), orderBy("score", "desc"))
+    var q = query(collection(db, "users"), orderBy("score", "desc"), where("score", ">", 0) )
     const querySnapShot = await getDocs(q);
 
     querySnapShot.forEach((doc) => {
@@ -31,12 +31,20 @@ export const getUserItem = async () => {
     // console.log(currentUserUid)
     try {
         const docRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc((docRef),user);
+        const docSnap = await getDoc((docRef), user);
+
 
         if (docSnap.exists()) {
             // ? this loops infinitly 
             console.log("Document data:", docSnap.data());
-            return docSnap.data(); // Directly return the document data
+
+            // TODO: include the id in the docsnap
+            // var theUserData = {...doc.data(), id: doc.id}
+            var theUserData = { ...docSnap.data(), id: docSnap.id } // to get the id frfom the docsnap
+            // usersData.push(theUserData)
+
+            // return docSnap.data() 
+            return theUserData; // Directly return the document data
         } else {
             console.log("No such document!");
             return null; // Return null if the document does not exist
