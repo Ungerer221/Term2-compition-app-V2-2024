@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
     plantSelectcontainer: {
         flex: 0,
         width: '100%',
-        height: 180,
+        height: 80,
         // backgroundColor: 'purple',
         backgroundColor: '#FFD166',
         alignItems: 'center',

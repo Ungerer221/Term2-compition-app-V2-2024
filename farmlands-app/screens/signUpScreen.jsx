@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native'
 // import React from 'react'
 import React, { useEffect, useState } from 'react';
 // views
@@ -10,6 +10,7 @@ import EmailInputField from '../components/emailInputField';
 import UserNameInput from '../components/userNameInput';
 // firebase
 import { createNewUser, getloggedinUser, handleSignup } from '../services/authService';
+
 
 // todo : make the sign up screen part of the drawer navigation for the menu button
 export default function SignUpScreen({ navigation }) {
@@ -71,55 +72,56 @@ export default function SignUpScreen({ navigation }) {
     // };
 
     return (
-        <View style={styles.container}>
-            <TopNavBar />
-            <Text style={styles.loginHeadingText}>Sign Up</Text>
-            <Text>If you already have an account then login</Text>
-            <Image
-                style={styles.backGroundImage}
-                source={require('../assets/54.png')}
-            />
-            <View style={styles.formCon}>
-                {/* //* username */}
-                <TextInput
-                    style={styles.input}
-                    placeholder='Username'
-                    onChangeText={newText => setUsername(newText)}
-                    value={username}
+        <ScrollView>
+            <View style={styles.container}>
+                <TopNavBar />
+                <Text style={styles.loginHeadingText}>Sign Up</Text>
+                <Text>If you already have an account then login</Text>
+                <Image
+                    style={styles.backGroundImage}
+                    source={require('../assets/54.png')}
                 />
-                {/* //* email */}
-                <TextInput
-                    style={styles.input}
-                    placeholder='email'
-                    onChangeText={newText => setEmail(newText)}
-                    value={email}
-                />
-                {/* //* pass word field */}
-                <TextInput
-                    style={styles.input}
-                    placeholder='password'
-                    onChangeText={newText => setPassword(newText)}
-                    value={password}
-                />
-                <View style={styles.buttonContainer}>
-                    {/* submit button  */}
-                    <TouchableOpacity
-                        style={styles.signUpButton}
-                        onPress={signUp}
-                    >
-                        <Text style={styles.signUpButtonText}>SignUp</Text>
-                    </TouchableOpacity>
-                    {/* link to login */}
-                    <TouchableOpacity
-                        style={styles.navSignupButton}
-                        onPress={() => navigation.navigate('Login')}
-                    >
-                        <Text style={styles.loginButtonText}>Login</Text>
-                    </TouchableOpacity>
+                <View style={styles.formCon}>
+                    {/* //* username */}
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Username'
+                        onChangeText={newText => setUsername(newText)}
+                        value={username}
+                    />
+                    {/* //* email */}
+                    <TextInput
+                        style={styles.input}
+                        placeholder='email'
+                        onChangeText={newText => setEmail(newText)}
+                        value={email}
+                    />
+                    {/* //* pass word field */}
+                    <TextInput
+                        style={styles.input}
+                        placeholder='password'
+                        onChangeText={newText => setPassword(newText)}
+                        value={password}
+                    />
+                    <View style={styles.buttonContainer}>
+                        {/* submit button  */}
+                        <TouchableOpacity
+                            style={styles.signUpButton}
+                            onPress={signUp}
+                        >
+                            <Text style={styles.signUpButtonText}>SignUp</Text>
+                        </TouchableOpacity>
+                        {/* link to login */}
+                        <TouchableOpacity
+                            style={styles.navSignupButton}
+                            onPress={() => navigation.navigate('Login')}
+                        >
+                            <Text style={styles.loginButtonText}>Login</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
-
-        </View>
+        </ScrollView>
     )
 }
 const styles = StyleSheet.create({

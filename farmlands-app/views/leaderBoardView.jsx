@@ -70,7 +70,7 @@ export default function LeaderBoardView() {
                                             <Text style={styles.userDateText}>{item.username}</Text>
                                         </View>
                                         <Text>${item.score}.00</Text>
-                                        <Text>h{users.date}</Text>
+                                        <Text>Joined{users.date}</Text>
                                     </View>
                                 ))
                             ) : (

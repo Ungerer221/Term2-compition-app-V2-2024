@@ -1,9 +1,21 @@
+<img src='Readme-Assets\Banner.png'/>
+
 # Term2_Compitition_Application_2024
  This is the repo for our term 2 application term project. For this project we were tasked with creating a compitition application of any kind. 
+
+<h3 align="center">Farmlands</h3>
+
+<h5 align="center" style="padding:0;margin:0;">Ungerer Hattingh</h5>
+<h5 align="center" style="padding:0;margin:0;">221302</h5>
+<h6 align="center">DV300 Term 2 2024</h6>
 
 # Licensing 
 >Note: [warning]
 > This app is my own app and I reserve all rights 
+
+# Demo Video of app
+
+[Video](https://drive.google.com/drive/folders/1DczZS54wT2f32Re7YhVHRwPufeDWTxII?usp=drive_link) Link
 
 
 ## Content
@@ -104,7 +116,7 @@ The apps current features and functionality
 
 3. Showing all current users 
 
-<img src='Readme-Assets\leaderboardWidget.png'/>
+<img src='Readme-Assets\Compsection.png'/>
 
 ## Functionality 
 
@@ -131,6 +143,8 @@ The apps current features and functionality
     meaning that no matter the winning conditions it can be adjusted to for each competition and can then easily compare the users unique score to the competition requirment and then declair a winner
 
 2. Preloaders 
+
+3. login and signup failed indicators and hide and show password feature.
 
 <br>
 
@@ -163,3 +177,7 @@ HugeIcons
 
 The GitHub repo where i got all the badges to display in the readme
 [markdown-badges](https://github.com/Ileriayo/markdown-badges/blob/master/README.md)
+
+## Youtube Videos
+
+The [video](https://www.youtube.com/watch?v=s7ackFpN-GU&t=18s) I used to learn the navigation nesting 

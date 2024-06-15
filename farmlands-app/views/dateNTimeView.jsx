@@ -81,6 +81,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderTopLeftRadius: 12,
         borderBottomLeftRadius: 12,
+        // borderTopRightRadius:6,
+        // borderBottomEndRadius:6,
         width: 190,
     },
     timeCon02: {
