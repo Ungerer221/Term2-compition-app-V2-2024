@@ -146,6 +146,10 @@ The user when signing up is created in the firebase auth aswell as in the user c
 
 using firebase auth function the app will allow authentication to the user with the matching email and password 
 
+### **Winner Functionality** !!!
+
+The Winnier determination function for the money competition is functional and does work however it only works in the console.log(), it doesn't display any client side visual changes yet.
+
 ### Admin Features 
 
 these are features that are only available to the admin
@@ -158,7 +162,7 @@ these are features that are only available to the admin
 
 # Featurs Still to be implemented 
 
-1. Winner determination :upside_down_face: was attempted
+1. Full Winner determination :upside_down_face:
     The score will be split into two types of scores. One, the global score and the other, the competition specific score.
     This will allow for better score management as the score is handled within the competition > enrolled > user.doc - making the score specific to the user in that competition.
     meaning that no matter the winning conditions it can be adjusted to for each competition and can then easily compare the users unique score to the competition requirment and then declair a winner

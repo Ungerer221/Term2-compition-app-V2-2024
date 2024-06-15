@@ -23,7 +23,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
     const [itemEndDay, setItemEndDay] = useState()
     const [itemEndMonth, setItemEndMonth] = useState()
     const [itemEndYear, setItemEndYear] = useState()
-    const [itemTargetScore, setItemTargetScore] = useState()
+    const [itemTargetScore, setItemTargetScore] = useState(route.params.itemTargetScore)
 
     const { competition } = props
     const [enrolled, setEnrolled] = useState([]);
@@ -94,20 +94,35 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
 
     const enrollUser = () => { handleSettingEnrollment() }
 
-    // Determinig the winner function Attempt to loop through all the users data and to get all the scores 
-    const getAllScores = (enrolled) => {
-        const scores = [];
-        // Loop through each user and push their score into the scores array
-        for (let i = 0; i < enrolled.length; i++) {
-          scores.push(enrolled[i].score);
-        }
-        setUserScores(scores)
-        return scores;
-    };
-    console.log(userScores)
-    
-    
+    useEffect(()=>{
+        //Get set admin score
+        const targetScore = itemTargetScore
+        //Loop through object and create new object with username : score
+        let collectedUsers = []
+        enrolled.forEach(userObj => { 
+            if(Number(userObj.score) >= targetScore ) {
+                let userAndScore = {}
+                userAndScore[userObj.username] = userObj.score
+                collectedUsers.push(userAndScore)
+            }
+        });
+        setUserScores(collectedUsers)
 
+    },[enrolled])
+
+    console.log('User Scores',userScores)
+
+
+    // Determinig the winner function Attempt to loop through all the users data and to get all the scores 
+    // const getAllScores = (enrolled) => {
+    //     const scores = [];
+    //     // Loop through each user and push their score into the scores array
+    //     for (let i = 0; i < enrolled.length; i++) {
+    //       scores.push(enrolled[i].score);
+    //     }
+    //     setUserScores(scores)
+    //     return scores;
+    // };
 
     return (
         <ScrollView>
