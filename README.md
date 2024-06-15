@@ -172,10 +172,23 @@ these are features that are only available to the admin
 - 2nd loop through all enrolled users in the subcollection and get all the users competition score 
 - 3rd compare the users score to the target score 
 - 4th if `user score` > `target score` then declare that user the winner 
+- 5th show on client side who the winner is 
 
 2. :point_right: Preloaders 
 
 3. login and signup failed indicators and hide and show password feature.
+
+<br>
+
+## Project experience 
+
+### The highlights :grin:
+- Learning how to code an app for mobile using react-native
+- Seeing the app live on my own phone was cool :smile:
+
+### The Lows of the Project 
+- struggeling to get the functionality with the front end and the firebase backend to work properly.
+- learning all the syntax and code to use for both apps and firbase together in the time space was a bit challanging but not a problem with more time. 
 
 <br>
 
