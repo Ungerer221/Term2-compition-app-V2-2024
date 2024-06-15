@@ -23,10 +23,12 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
     const [itemEndDay, setItemEndDay] = useState()
     const [itemEndMonth, setItemEndMonth] = useState()
     const [itemEndYear, setItemEndYear] = useState()
+    const [itemTargetScore, setItemTargetScore] = useState()
 
     const { competition } = props
     const [enrolled, setEnrolled] = useState([]);
     const [user, setUser] = useState([]);
+    const [userScores, setUserScores] = useState([]); // for the looping and getting all the users score data
     const [totalEnrolled, setTotalEnrolled] = useState();
 
     const [enrollUsername, setEnrollUsername] = useState()
@@ -34,7 +36,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
 
     useFocusEffect(
         React.useCallback(() => {
-            const { itemID, itemName, itemDesc, itemEndDay, itemEndMonth, itemEndYear, } = route.params;
+            const { itemID, itemName, itemDesc, itemEndDay, itemEndMonth, itemEndYear, itemTargetScore } = route.params;
 
             // handleGettingCompItemData(itemID)
             setItemId(itemID)
@@ -43,6 +45,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
             setItemEndDay(itemEndDay)
             setItemEndMonth(itemEndMonth)
             setItemEndYear(itemEndYear)
+            setItemTargetScore(itemTargetScore)
 
             // handleSettingEnrollment()
             getCurrentUserData()
@@ -58,10 +61,13 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
                     // console.log("Current enrolled: ", doc.data());
                 });
                 setEnrolled(enrolledData)
-
+                // console.log(enrolledData)
+                // getting the lenght of the array enrolled data
                 var numberOfEnrolled = enrolledData.length
                 setTotalEnrolled(numberOfEnrolled)
-                console.log(numberOfEnrolled)
+                // console.log(numberOfEnrolled)
+
+                // TODO: here we want to loop through enrolled data and get all the scores to compare 
             });
             return () => {
                 console.log("OutOfview")
@@ -83,10 +89,25 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
         var compData = await addUserToComp(itemId, user) // this must be the user object
         setCompItem(compData)
         // addUserToComp(),
-        console.log("pressed")
+        // console.log("pressed")
     }
 
     const enrollUser = () => { handleSettingEnrollment() }
+
+    // Determinig the winner function Attempt to loop through all the users data and to get all the scores 
+    const getAllScores = (enrolled) => {
+        const scores = [];
+        // Loop through each user and push their score into the scores array
+        for (let i = 0; i < enrolled.length; i++) {
+          scores.push(enrolled[i].score);
+        }
+        setUserScores(scores)
+        return scores;
+    };
+    console.log(userScores)
+    
+    
+
 
     return (
         <ScrollView>
@@ -101,7 +122,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
                         <View style={styles.enrollCardTitleRow}>
                             <View style={styles.enrollCardTitleCon}>
                                 <Text style={styles.enrollCardTitle}>{itemName}</Text>
-                                <Text style={styles.enrollText03}>({totalEnrolled})</Text>
+                                <Text style={styles.enrollText03}>Users: ({totalEnrolled})</Text>
                             </View>
                             <Sun01Icon />
                         </View>
@@ -138,7 +159,10 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
                                 <View key={index} style={styles.usersListItem}>
                                     {/* <Text>{item.name}</Text> */}
                                     <View>
-                                        <Text style={styles.usersListItemheadingText}>{item.username}</Text>
+                                        <View style={styles.usersListItemCon}>
+                                            <Text style={styles.usersListItemheadingText}>{item.username}</Text>
+                                            <Text>${item.score}.00</Text>
+                                        </View>
                                         <Text>{item.email}</Text>
                                     </View>
                                     <UserCircleIcon />
@@ -274,8 +298,13 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         gap: 10,
     },
-    usersListItemheadingText:{
-        fontSize:16,
-        fontWeight:"900",
+    usersListItemheadingText: {
+        fontSize: 16,
+        fontWeight: "900",
+    },
+    usersListItemCon:{
+        flexDirection:'row',
+        alignItems:'center',
+        gap:10,
     }
 })

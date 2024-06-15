@@ -75,6 +75,7 @@ export default function CompListScreen({ navigation }) {
                                             itemEndDay: item?.endDay,
                                             itemEndMonth: item?.endMonth,
                                             itemEndYear: item?.endYear,
+                                            itemTargetScore: item?.targetScore
                                         }
                                     )}>
                                         <Text>{item.name}</Text>
