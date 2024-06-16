@@ -15,7 +15,7 @@
 
 # Demo Video of app
 
-Here is the demo video that showcases the app in its current state
+Here is the `demo video` that showcases the app in its current state
 
 [Video](https://drive.google.com/drive/folders/1DczZS54wT2f32Re7YhVHRwPufeDWTxII?usp=drive_link) Link
 
@@ -147,6 +147,9 @@ The user when signing up is created in the firebase auth aswell as in the user c
 using firebase auth function the app will allow authentication to the user with the matching email and password 
 
 ### **Winner Functionality** !!!
+
+Here is a demo video for the proof of concept for the winner determination 
+[Video](https://drive.google.com/file/d/1GQnOOS7VoZ87V9MY3z7ZKus-HAw1Sddp/view?usp=drive_link)
 
 The Winnier determination function for the money competition is functional and does work however it only works in the console.log(), it doesn't display any client side visual changes yet.
 
