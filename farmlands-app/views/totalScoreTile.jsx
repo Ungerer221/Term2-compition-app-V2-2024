@@ -26,7 +26,7 @@ export default function TotalScoreTile() {
     return (
         <View style={styles.container}>
             <FontAwesome name="money" size={24} color="white" />
-            <Text style={styles.scoreText}>${user.score}.00</Text>
+            <Text style={styles.scoreText}>${user.score}.00</Text> 
             <FontAwesome name="money" size={24} color="white" />
         </View>
     )

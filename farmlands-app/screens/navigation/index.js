@@ -80,7 +80,7 @@ export function MyTab() {
             tabBarActiveTintColor: '#F65774',
           }}
         />
-        {/* <Tab.Screen
+        <Tab.Screen
           name="AdminStack"
           component={AdminStack}
           options={{
@@ -91,7 +91,7 @@ export function MyTab() {
             ),
             tabBarActiveTintColor: '#F65774',
           }}
-        /> */}
+        />
         {/* <Tab.Screen /> */}
       </Tab.Navigator>
     </NavigationContainer>

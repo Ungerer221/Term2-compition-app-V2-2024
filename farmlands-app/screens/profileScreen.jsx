@@ -76,7 +76,7 @@ export default function ProfileScreen({ route, navigation }) {
             <ProfilePicMain></ProfilePicMain>
             <View style={styles.userDataCon}>
               <Text style={styles.userDataTitle}>{user.username}</Text>
-              <Text style={styles.userDataBio}>{user.email}</Text>
+              <Text style={styles.userDataEmail}>{user.email}</Text>
               <Text style={styles.userDataBio}>Person bio</Text>
               <DateJoined></DateJoined>
             </View>
@@ -182,6 +182,11 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
     textAlign: 'center',
   },
+  userDataEmail:{
+    fontSize: 16,
+    fontWeight: '400',
+    textAlign: 'center',
+  },
   userDataBio: {
     fontSize: 16,
     fontWeight: '400',
@@ -226,6 +231,7 @@ const styles = StyleSheet.create({
     // justifyContent:'center',
     // alignItems:'center',
   },
+  
   dashBoardSecText: {
     fontSize: 24,
     fontWeight: '700',

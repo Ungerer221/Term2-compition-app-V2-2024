@@ -23,7 +23,7 @@ export const getAllUsersList = async () => {
 
 // console.log(getloggedinUser())
 
-// TODO : get single user
+// * : get single user data
 export const getUserItem = async () => {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -33,16 +33,13 @@ export const getUserItem = async () => {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc((docRef), user);
 
-
         if (docSnap.exists()) {
             // ? this loops infinitly 
             console.log("Document data:", docSnap.data());
-
             // TODO: include the id in the docsnap
             // var theUserData = {...doc.data(), id: doc.id}
             var theUserData = { ...docSnap.data(), id: docSnap.id } // to get the id frfom the docsnap
             // usersData.push(theUserData)
-
             // return docSnap.data() 
             return theUserData; // Directly return the document data
         } else {

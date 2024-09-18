@@ -10,13 +10,14 @@ import { db } from '../config/firebase';
 import { getUserItem } from '../services/userService';
 import UserCircleIcon from '../icons/user-circle-stroke-rounded';
 
-
+// the competition detail screen
 export default function CompDetailsScreen({ route, navigation, }, props) {
 
+    // * useStates.................................................................................
+    // modal usestate
     const [modalVisible, setModalVisible] = useState(false);
-
+    // competion item deatls usestates
     const [compItem, setCompItem] = useState([])
-
     const [itemId, setItemId] = useState()
     const [itemName, setItemName] = useState()
     const [itemDescription, setItemDescription] = useState()
@@ -39,6 +40,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
             const { itemID, itemName, itemDesc, itemEndDay, itemEndMonth, itemEndYear, itemTargetScore } = route.params;
 
             // handleGettingCompItemData(itemID)
+            // * the competition data
             setItemId(itemID)
             setItemName(itemName)
             setItemDescription(itemDesc)
@@ -47,22 +49,25 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
             setItemEndYear(itemEndYear)
             setItemTargetScore(itemTargetScore)
 
-            // handleSettingEnrollment()
+            // * handleSettingEnrollment()
             getCurrentUserData()
             // console.log(getCurrentUserData)
 
             const compRef = doc(db, "competitions", itemID)
             const enrolledRef = collection(compRef, "enrolled")
 
+            // * showing the enrolled users data...................................................
             const unsubscribe = onSnapshot(enrolledRef, (querySnapshot) => {
+                // setting the enrolled data to variable
                 const enrolledData = [];
                 querySnapshot.forEach((doc) => {
                     enrolledData.push(doc.data());
                     // console.log("Current enrolled: ", doc.data());
                 });
-                setEnrolled(enrolledData)
-                // console.log(enrolledData)
-                // getting the lenght of the array enrolled data
+                // setting the enrolled data to a state = enrolled
+                setEnrolled(enrolledData) // from variable
+                console.log(enrolledData)
+                // getting the length of the array enrolled data
                 var numberOfEnrolled = enrolledData.length
                 setTotalEnrolled(numberOfEnrolled)
                 // console.log(numberOfEnrolled)
@@ -77,7 +82,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
     )
 
 
-    // need to call the current user data
+    // * need to call the current user data
     const getCurrentUserData = async () => {
         var userData = await getUserItem()
         setUser(userData)
@@ -94,13 +99,13 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
 
     const enrollUser = () => { handleSettingEnrollment() }
 
-    useEffect(()=>{
+    useEffect(() => {
         //Get set admin score
         const targetScore = itemTargetScore
         //Loop through object and create new object with username : score
         let collectedUsers = []
-        enrolled.forEach(userObj => { 
-            if(Number(userObj.score) >= targetScore ) {
+        enrolled.forEach(userObj => {
+            if (Number(userObj.score) >= targetScore) {
                 let userAndScore = {}
                 userAndScore[userObj.username] = userObj.score
                 collectedUsers.push(userAndScore)
@@ -108,12 +113,10 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
         });
         setUserScores(collectedUsers)
 
-    },[enrolled])
+    }, [enrolled])
+    console.log('User Scores', userScores)
 
-    console.log('User Scores',userScores)
-
-
-    // Determinig the winner function Attempt to loop through all the users data and to get all the scores 
+    // * Determinig the winner function Attempt to loop through all the users data and to get all the scores 
     // const getAllScores = (enrolled) => {
     //     const scores = [];
     //     // Loop through each user and push their score into the scores array
@@ -166,9 +169,10 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
                         </View>
                     </View>
 
-                    {/* show current users in the competition */}
+                    {/* // * show current users in the competition.............. */}
                     <View style={styles.usersListCon}>
                         <Text style={styles.enrollText03}>Current Participents in this Competition:</Text>
+                        {/* //* maping the users.................... */}
                         {enrolled != [] ? (
                             enrolled.map((item, index) => (
                                 <View key={index} style={styles.usersListItem}>
@@ -317,9 +321,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "900",
     },
-    usersListItemCon:{
-        flexDirection:'row',
-        alignItems:'center',
-        gap:10,
+    usersListItemCon: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
     }
 })
