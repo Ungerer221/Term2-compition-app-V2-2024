@@ -56,7 +56,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
             const compRef = doc(db, "competitions", itemID)
             const enrolledRef = collection(compRef, "enrolled")
 
-            // * showing the enrolled users data...................................................
+            // * showing the enrolled users data................................................... //
             const unsubscribe = onSnapshot(enrolledRef, (querySnapshot) => {
                 // setting the enrolled data to variable
                 const enrolledData = [];
@@ -72,7 +72,7 @@ export default function CompDetailsScreen({ route, navigation, }, props) {
                 setTotalEnrolled(numberOfEnrolled)
                 // console.log(numberOfEnrolled)
 
-                // TODO: here we want to loop through enrolled data and get all the scores to compare 
+                // TODO: here we want to loop through enrolled data and get all the scores to compare using a filtering 
             });
             return () => {
                 console.log("OutOfview")
