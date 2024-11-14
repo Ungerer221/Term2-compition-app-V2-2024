@@ -49,6 +49,10 @@ And `Asprite` is the pixel art program I used to draw the pixel art in the app.
 
 <br>
 
+> [!IMPORTANT]  
+> This version of the project no longer is functional 
+> A more funtional version of the project can be found [here](https://github.com/Ungerer221/Term2-app-Farmlands-V3)
+
 # Prerequisite
 
 for this project you will need
@@ -59,6 +63,16 @@ for this project you will need
 4. [firebase](https://firebase.google.com/) acount and a database setup ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
 
 <br>
+
+### to Update 
+
+```
+npx expo install expo-status-bar
+```
+
+```
+npm install react-native@{{VERSION}}
+```
 
 # How to Install and Setup
 
