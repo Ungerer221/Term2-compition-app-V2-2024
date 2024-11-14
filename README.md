@@ -51,6 +51,7 @@ And `Asprite` is the pixel art program I used to draw the pixel art in the app.
 
 > [!IMPORTANT]  
 > This version of the project no longer is functional 
+
 > A more funtional version of the project can be found [here](https://github.com/Ungerer221/Term2-app-Farmlands-V3)
 
 # Prerequisite
